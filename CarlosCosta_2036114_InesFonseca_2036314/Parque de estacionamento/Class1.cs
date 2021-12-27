@@ -8,21 +8,24 @@ namespace Parque_de_estacionamento
 {
     public class AllOtherMenus
     {
-        //private static int userInput = int.Parse(Console.ReadLine());
+       /* //private static int userInput = int.Parse(Console.ReadLine());
         public static void MainMenu(int userInput) 
         {
             Console.WriteLine("MainMenu selected!");
-            switch (userInput)
+            while (true)
             {
-                case 1:
-                    Console.WriteLine("MainMenu select 1");
-                    break;
-               case 2:
-                    Console.WriteLine("MainMenu select 2");
-                    break;
-               default:
-                    CloseApp(true);
-                    break;
+                switch (userInput)
+                {
+                    case 1:
+                        Console.WriteLine("MainMenu select 1");
+                        break;
+                    case 2:
+                        Console.WriteLine("MainMenu select 2");
+                        break;
+                    default:
+                        CloseApp(true);
+                        break;
+                }
             }
         }
 
@@ -43,7 +46,7 @@ namespace Parque_de_estacionamento
         public static bool CloseApp(bool setMenuOff)
         {
             return false;
-        }
+        }*/
     }
 
 
