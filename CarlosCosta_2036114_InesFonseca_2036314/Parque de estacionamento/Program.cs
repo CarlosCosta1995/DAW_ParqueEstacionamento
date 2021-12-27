@@ -8,6 +8,14 @@ Console.ForegroundColor = ConsoleColor.Yellow; //Console Ink Color
 bool activeMenu = true; //Bool to Mantain the menu always active
 while (activeMenu)
 {
+    Console.WriteLine("Welcome to CarSlot Parking Agency!");
+    Console.WriteLine(DateTime.Now); //Display date and time
+    Console.WriteLine("Navigate through the Menus by presseing the representative number!");
+    Console.WriteLine("Client Menu [1]");
+    Console.WriteLine("Admin Menu [2]");
+    Console.WriteLine("Options [3]");
+    Console.WriteLine("Leave Application [4]");
+
     int userSelection = int.Parse(Console.ReadLine()); //user input to navigate through the Main Menu
 
     switch (userSelection) //Ref: https://stackoverflow.com/questions/43484523/switch-statements-for-a-menu-c
@@ -15,6 +23,7 @@ while (activeMenu)
         case 0:
             //call Main Menu
             MainMenu(userSelection);
+
             break;
         case 1:
             //Call client Menu
@@ -32,12 +41,13 @@ while (activeMenu)
             activeMenu = CloseApp(activeMenu); //Closing Application
             break;
         default:
-            //Unnexpected action from the user. What should it happen in this case?
+            //Unnexpected action from the user. What should it happen in this case? // shows the main menu whatever happends
             break;
     }
+    break;
 
 
-    static void MainMenu(int userInput)
+    static void MainMenu(int userInput)  //why?
     {
         Console.WriteLine("MainMenu selected!");
         switch (userInput)
@@ -52,11 +62,52 @@ while (activeMenu)
                 CloseApp(true);
                 break;
         }
+        
     }
+    
 
-    static void ClientMenu()
+    static void ClientMenu() //client menu has to have, date, schedual, (3)zones, back to main menu and
     {
         Console.WriteLine("ClientMenu selected!");
+        Console.WriteLine(DateTime.Now);
+        Console.WriteLine("     >Schedule<    ");
+        Console.WriteLine("----working days----");
+        Console.WriteLine(" 9:00 am - 8:00 pm ");
+        Console.WriteLine("-----saturdays------");
+        Console.WriteLine(" 9:00 am - 2:00 pm ");
+        Console.WriteLine(">Choose a zone number<");
+        Console.WriteLine("zone 1");
+        Console.WriteLine("zone 2");
+        Console.WriteLine("zone 3");
+        
+
+        int zone = int.Parse(Console.ReadLine());
+        
+        if (zone == 1) {
+            Console.WriteLine("Zone 1 selected");
+            Console.WriteLine("-Price/máx.Hour-");
+            Console.WriteLine("1.15€/h - max.45 min");
+            if
+
+        }
+        
+        if (zone == 2)
+        {
+            Console.WriteLine("Zone 2 selected");
+            Console.WriteLine("-Price/máx.Hour-");
+            Console.WriteLine("1€/h - max.2 hours");
+
+        }
+      
+        if (zone == 2)
+        {
+            Console.WriteLine("Zone 3 selected");
+            Console.WriteLine("-Price/máx.Hour-");
+            Console.WriteLine("0.62€/h - no max.hours");
+
+
+        }
+
     }
 
     static void AdminMenu()
@@ -71,5 +122,25 @@ while (activeMenu)
     static bool CloseApp(bool setMenuOff)
     {
         return false;
+    }
+    public class Zones (){
+
+        Console.WriteLine("Please insert your car plate: "); // to ask for a car plate
+        // colocar aqui um array para memorizar a placa? ou apenas usa-la para o ticket
+
+
+        Console.WriteLine("Insert the coins until you achive the time you need: ");
+        //aqui colocar a formula de contar moedas e juntá-las ao tempo
+
+
+        Console.WriteLine("Back to main menu [0]"); //to come back to main menu
+        int backMainMenu = int.Parse(Console.ReadLine());
+
+        if (backMainMenu == 0){
+            activeMenu = CloseApp(activeMenu); //como chamar para activar o backMAinMenu
+
+
+        }
+        
     }
 }
