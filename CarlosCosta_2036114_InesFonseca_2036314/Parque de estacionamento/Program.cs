@@ -15,9 +15,9 @@ while (activeMenu)
     
 }*/
 
-
+/*
 Console.WriteLine("Insira a sua matricula");
 string carPlateZone1 = Console.ReadLine();
 CarPlate newCarPlate = new CarPlate(carPlateZone1, carPlateZone1, carPlateZone1);
 
-Console.WriteLine(newCarPlate.occupiedSlotsZone1(carPlateZone1));
+Console.WriteLine(newCarPlate.occupiedSlotsZone1(carPlateZone1))*/
