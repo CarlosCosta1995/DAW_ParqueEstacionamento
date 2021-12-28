@@ -24,9 +24,8 @@ while (activeMenu)
     switch (userSelection) //Ref: https://stackoverflow.com/questions/43484523/switch-statements-for-a-menu-c
     {
         case 0:
-            //call Main Menu
+            //call Main Menu - go back buttons
             MainMenu(userSelection);
-
             break;
         case 1:
             //Call client Menu
@@ -36,11 +35,7 @@ while (activeMenu)
             //Call Admin Menu
             AdminMenu();
             break;
-        case 3:
-            //Call Option Menu
-            OptionsMenu();
-            break;
-        case 4:
+       case 4:
             activeMenu = CloseApp(activeMenu); //Closing Application
             break;
         default:
@@ -82,12 +77,13 @@ while (activeMenu)
         Console.WriteLine("_zone 1");
         Console.WriteLine("_zone 2");
         Console.WriteLine("_zone 3");
+        Console.WriteLine("back to main menu [0]");
 
 
-        int zone = int.Parse(Console.ReadLine());
-        int backMainMenu = int.Parse(Console.ReadLine());
+        int choice = int.Parse(Console.ReadLine()); //choice of the number
+        
 
-        if (zone == 1) {
+        if (choice == 1) {
             Console.WriteLine("Zone 1 selected");
             Console.WriteLine("---Price/max.Hour---");
             Console.WriteLine("1.15€/h - max.45 min");
@@ -95,7 +91,7 @@ while (activeMenu)
 
         }
 
-        if (zone == 2)
+        if (choice == 2)
         {
             Console.WriteLine("Zone 2 selected");
             Console.WriteLine("---Price/max.Hour---");
@@ -103,7 +99,7 @@ while (activeMenu)
 
         }
 
-        if (zone == 3)
+        if (choice == 3)
         {
             Console.WriteLine("Zone 3 selected");
             Console.WriteLine("---Price/max.Hour---");
@@ -111,7 +107,21 @@ while (activeMenu)
 
 
         }
-        
+        if (choice == 0)
+        {
+            Console.WriteLine("fg");
+            //MainMenu(); //back to the main menu
+            //break;
+
+        }
+        else {
+            Console.WriteLine("Please, choose only the numbers available [0,1,2,3]");
+            //MainMenu(); //back to the main menu
+            //break;
+
+        }
+
+
     }
 
     static void AdminMenu()
@@ -124,7 +134,7 @@ while (activeMenu)
         return false;
     }
 }
-public class Zones () {
+/*public class Zones () {
 
         int CarPlate = int.Parse(Console.ReadLine()); // allow client to insert Car plate
 
@@ -142,6 +152,6 @@ public class Zones () {
 
         
         
-    }
+    }*/
 
 
