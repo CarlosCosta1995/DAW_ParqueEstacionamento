@@ -16,9 +16,9 @@ namespace Functionalities
         //Outputs a list of plates and a quantity of plate. 
 
         //Receive Car Plates and store in the next variables.
-        public string _carPlateZone1;
-        public string _carPlateZone2;
-        public string _carPlateZone3;
+        public string _carPlateZone1 { get; set; }
+        public string _carPlateZone2 { get; set; }
+        public string _carPlateZone3 { get; set; }
 
         //Creating an Array to store the plates.
         public string[] _plateArrayZone1 = { };
@@ -26,9 +26,9 @@ namespace Functionalities
         public string[] _plateArrayZone3 = { };
 
         //Stores the arrays.Length into a variable
-        public int carsInZone1 = 0;
-        private int carsInZone2 = 0;
-        private int carsInZone3 = 0;
+        public int carsInZone1 { get; set; }
+        public int carsInZone2 { get; set; }
+        public int carsInZone3 { get; set; }
 
         //Atributing values to the current class from outside sources.
         public CarPlate(string carPlateZone1, string carPlateZone2, string carPlateZone3)
@@ -56,6 +56,10 @@ namespace Functionalities
             {
                 return carsInZone1 = carsInZone1 - 1;
             }
+        }
+        public static void occupiedZone1(int carsInZone1)
+        {
+            Console.WriteLine(carsInZone1);
         }
 
         //Store and count Array elements for Zone2
@@ -108,9 +112,9 @@ namespace Functionalities
         public int carSlotsZone3 = 70;
 
         //Quantity of cars in the zone
-        public int _numCarInZone1;
-        public int _numCarInZone2;
-        public int _numCarInZone3;
+        public int _numCarInZone1 { get; set; }
+        public int _numCarInZone2 { get; set; }
+        public int _numCarInZone3 { get; set; }
 
         public ZoneAvailability(int carsInZone1, int carsInZone2, int carsInZone3)
         {
@@ -181,8 +185,8 @@ namespace Functionalities
 
         //Creating a varible to receive the cash
         public double _cash;
-        public double _addCash;
-        public double _machineTotalAmount;
+        public double _addCash { get; set; }
+        public double _machineTotalAmount { get; set; }
         public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 };
 
         public double insertingCash(double amount) //Asks the user to insert an amount of money
@@ -193,26 +197,31 @@ namespace Functionalities
             //https://stackoverflow.com/questions/61448526/java-checking-if-a-variable-is-equal-to-any-of-the-array-elements
             if (acceptedCash.Contains(amount))
             {
-                Console.WriteLine("\nYou insert {0} euros\n", amount);
+                Console.WriteLine("\nYou insert {0} €\n", amount);
                 _cash = amount;
             }
             else
             {
-                Console.WriteLine("\nYou insert {0} euros", amount);
+                Console.WriteLine("\nYou insert {0} €", amount);
                 Console.WriteLine("You money is not accepted by the machine!");
                 Console.WriteLine("The coins accepted are {0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50} cents and {1.00, 2.00, 5.00, 10.00, 20.00} euros. \n");
             }
 
             //calculates the addiion of the cash
             _addCash += _cash;
-            machineTotalMoney(); //To _addCash to the total money inside the machine by calling the method
+            machineTotalMoney(_addCash); //To _addCash to the total money inside the machine by calling the method
             return _addCash;
         }
 
-        public void machineTotalMoney() //Calculates the total of cash inside the Machine
+        public double machineTotalMoney(double _addCash) //Calculates the total of cash inside the Machine
         {
             _machineTotalAmount += _addCash;
-            //return _machineTotalAmount;
+            return _machineTotalAmount;
+        }
+
+        public void printTotalMoney() 
+        {
+            Console.WriteLine("The total amount from all zones is" +_machineTotalAmount);
         }
 
         public void refundCash() //Gives the feeback of the amount inserted, reset the cash and subtracts the amount returned.
@@ -240,20 +249,20 @@ namespace Functionalities
         public double _timePerHourZone1 = 1.15/60;//Convert price per hour to price per minutes
         public double _maxMinutesInZone1 = 45;// Time already in minutes
         private double MaxTimePaidInZone1 = ((1.15 * 45) / 60);// Calculates the maximum money to stay for 45min
-        public double _timePaidForZone1; //Stores the value Calculated by the function PayZone1()
-        
+        public double _timePaidForZone1 { get; set; } //Stores the value Calculated by the function PayZone1()
+
 
         //Zone2: 1.00 euros/h => max 2h
         public double _timePerHourZone2 = 1.00/60;//Convert price per hour to price per minutes
         public double _maxMinutesInZone2 = 2 * 60;//Convert time in minutes
         private double MaxTimePaidInZone2 = ((1.00 * 120) / 60);// Calculates the maximum money to stay for 45min
-        public double _timePaidForZone2; //Stores the value Calculated by the function PayZone1()
+        public double _timePaidForZone2 { get; set; } //Stores the value Calculated by the function PayZone1()
 
         //Zone3: 0.62 euros/h => unlimited time
         public double _timePerHourZone3 = 0.62/60;//Convert price per hour to price per minutes
-        public double _timePaidForZone3; //Stores the value Calculated by the function PayZone1()
+        public double _timePaidForZone3 { get; set; } //Stores the value Calculated by the function PayZone1()
 
-        public double PayInZone1(double _addCash, double _timePerHourZone1, double _maxMinutesInZone1) //Payment for Zone 1
+        public double PayInZone1(double _addCash) //Payment for Zone 1
         {
             _timePaidForZone1 = ((_addCash * _maxMinutesInZone1) / _timePerHourZone1);
             if (_timePaidForZone1 <= MaxTimePaidInZone1)
@@ -267,6 +276,7 @@ namespace Functionalities
                 return _timePaidForZone1 = 0;
             }
         }
+
         public double PayInZone2(double _addCash, double _timePerHourZone2, double _maxMinutesInZone2) //Payment for Zone 2
         {
             _timePaidForZone2 = ((_addCash * _maxMinutesInZone2) / _timePerHourZone2);
@@ -282,29 +292,10 @@ namespace Functionalities
                 return _timePaidForZone2 = 0;
             }
         }
+
         public double PayInZone3(double _addCash, double _timePerHourZone3) //Payment for Zone 2
         {
             return _timePaidForZone3 = (_addCash / _timePerHourZone3);
         }
     }
-
-    /*public class TimeSlpit
-    {
-        //Split current time in year, month, day, hour, minutes
-        //https://docs.microsoft.com/pt-br/dotnet/api/system.datetime.adddays?view=net-6.0
-        //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.month?view=net-6.0
-        //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.parse?view=net-6.0
-        //https://youtu.be/KKzSQ6r93dY
-
-        public int _year { get; set; }
-        public int _month { get; set; }
-        public int _day { get; set; }
-        public int _hour { get; set; }
-        public int _minute { get; set; }
-
-        public static void DateTimeNow(int _year, int _month, int _day, int _hour, int _minute) 
-        {
-            Console.WriteLine("{0}/{1}/{2} at {3}h:{4}", _year, _month, _day, _hour, _minute);
-        }
-    }*/
 }
