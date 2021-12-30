@@ -225,5 +225,4 @@ static bool CloseApp(bool setMenuOff)
     return false;
 }
 
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
