@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Functionalities;
+using ConsolePrint;
 
 namespace Menus
 {
     public class AllMenus
     {
-        public static void MainMenu() 
+        //https://www.youtube.com/watch?v=9JST13MhrFU
+        public static void MainMenu() //Main Menu
         {
             Console.Clear();
 
@@ -47,8 +49,9 @@ namespace Menus
                         Console.WriteLine("choose only bettween the numbers on the console, please!");
                         break;
                 }
-            }
-        public static void ClientMenu() //https://www.youtube.com/watch?v=9JST13MhrFU
+            } 
+
+        public static void ClientMenu() //Clients Interactive Menu 
         {
             Console.Clear();
 
@@ -137,9 +140,9 @@ namespace Menus
             {
                 CloseApp();
             }*/
-        }
+        } 
 
-        public static void AdminLogInMenu() 
+        public static void AdminLogInMenu() //Security menu for the Admins
         {
             Console.Clear();
 
@@ -164,9 +167,9 @@ namespace Menus
                     Console.WriteLine("Blocked, you will be sent back to the main Menu. Goodbye!");
                     MainMenu();
                 }
-        }
+        } 
 
-        public static void AdminMenu()
+        public static void AdminMenu() //Clients Interactive Menu
         {
             Console.Clear();
 
@@ -249,15 +252,16 @@ namespace Menus
 
             }*/
 
-        }
+        } 
 
-        public static void OptionsMenu ()
+        public static void OptionsMenu() //Go to stand by menu? or Go to the Start menu?
         {
             Console.Clear();
 
             Console.WriteLine("OptionsMenu selected!");
         }
-        public static void CloseApp()
+
+        public static void CloseApp() //Close the application nor console
         {
 
             Environment.Exit(0); //Command to Close App
