@@ -37,7 +37,20 @@ namespace Functionalities
             this._carPlateZone2 = carPlateZone2;
             this._carPlateZone3 = carPlateZone3;
         }
+        
+        /* string[] pallets = { "B14", "A11", "B12", "A13" };
+           Console.WriteLine("");
 
+           Array.Clear(pallets, 0, 2);
+           Console.WriteLine($"Clearing 2 ... count: {pallets.Length}");
+           foreach (var pallet in pallets)
+           {
+           Console.WriteLine($"-- {pallet}");
+           } */
+        //we can use this code to clear the car plates when the park is full, ref.:https://docs.microsoft.com/en-us/learn/modules/csharp-arrays-operations/3-exercise-clear-resize#code-try-9
+
+        
+        
         //Store and Counts Array elements for Zone1
         public Array GetCarPlateZone1(string _carPlateZone1) //Store a car plate into the array, in Zone1.
         {
@@ -187,8 +200,11 @@ namespace Functionalities
         public double _cash;
         public double _addCash { get; set; }
         public double _machineTotalAmount { get; set; }
-        public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 };
-
+        public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 }; 
+        //change coins: can´t accept more than 50 cent because- zone1 max. 45 min which is up to 85 cent - zone2 max 1h which is up to 2€
+        //define what happens when the client uses other coins, letters or negative numbers
+        
+       
         public double insertingCash(double amount) //Asks the user to insert an amount of money
         {
 
@@ -239,6 +255,18 @@ namespace Functionalities
             }
         }
     }
+    
+    /* int[] inventory = { 200, 450, 700, 175, 250 };
+       int sum = 0;
+       int bin = 0;
+       foreach (int items in inventory)
+       {
+            sum += items;
+            bin++;
+            Console.WriteLine($"Bin {bin} = {items} items (Running total: {sum})");
+       }
+       Console.WriteLine($"We have {sum} items in inventory.");*/
+    //this code can be used to calculate the total amount of money, ref.:https://docs.microsoft.com/en-us/learn/modules/csharp-arrays/3-exercise-foreach#code-try-13
 
     public class ParkPayment
     {
@@ -272,7 +300,7 @@ namespace Functionalities
             }
             else
             {
-                AllMenus.ClientMenu(); //Replace for Zone Menu
+                AllMenus.ClientMenu(); //Replace for Zone Menu and refund
                 return _timePaidForZone1 = 0;
             }
         }
