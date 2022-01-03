@@ -59,13 +59,17 @@ namespace ConsolePrint
         //Print report Zones for Admin
         public static void ReportZone1() //Zone1 
         {
-           // CarPlate car1 = new CarPlate("00", "00", "00");
-           // ZoneAvailability av1 = new ZoneAvailability(0, 0, 0);
+            // CarPlate car1 = new CarPlate("00", "00", "00");
+            // ZoneAvailability av1 = new ZoneAvailability(0, 0, 0);
 
-            Console.WriteLine(" >Report of the day: Zone1< ");
+            Console.WriteLine("\n >Report of the day: Zone1< ");
             Console.WriteLine(DateTime.Now);
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
+            Console.WriteLine("There are {0} Slots Available.", ZoneAvailability.carSlotsZone1);//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
+            Console.WriteLine("-------");
+            Console.WriteLine("array novo, devia dar matricula -> " + (ZoneAvailability.carSlotsZone1 - CarPlate.novaLista.Count()));//Occupied Slots
+            
             Console.WriteLine(); //Cars that exceed the time allowed
             Console.WriteLine(" >End of Report< ");
             
@@ -73,7 +77,7 @@ namespace ConsolePrint
 
         public static void ReportZone2() //Zone2
         {
-            Console.WriteLine(" >Report of the day: Zone2< ");
+            Console.WriteLine("\n >Report of the day: Zone2< ");
             Console.WriteLine(DateTime.Now);
             Console.WriteLine(); //Available and Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed
@@ -82,7 +86,7 @@ namespace ConsolePrint
 
         public static void ReportZone3() //Zone3
         {
-            Console.WriteLine(" >Report of the day: Zone3< ");
+            Console.WriteLine("\n >Report of the day: Zone3< ");
             Console.WriteLine(DateTime.Now);
             Console.WriteLine(); //Available and Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed

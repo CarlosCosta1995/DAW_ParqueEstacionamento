@@ -17,8 +17,7 @@ while (activeMenu)
 {
     AllMenus.Start();
 }
-
-
+  
 
 /*
 Console.WriteLine("Insira a sua matricula");

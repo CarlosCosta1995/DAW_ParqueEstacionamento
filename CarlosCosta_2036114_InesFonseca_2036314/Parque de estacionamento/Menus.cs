@@ -172,21 +172,30 @@ namespace Menus
             //Ask the user for a Car Plate
             Console.WriteLine("Insert your Plate:");
             string carPlateZone1 = Console.ReadLine();
-            CarPlate newCarPlate = new CarPlate(carPlateZone1, carPlateZone1, carPlateZone1);
+            // CarPlate newCarPlate = new CarPlate(carPlateZone1);
+
+            //CarPlate._plateArrayZone1[0] =  carPlateZone1;
+
+            CarPlate.novaLista.Add(carPlateZone1);
+
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
-            double total = moneyMachine._addCash;
+            double total;
             ParkPayment paidpark = new ParkPayment();
+
 
             do
             {
                 Console.WriteLine("\nInsert your cash:");
-                moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                Console.WriteLine("You can be parked for {0} time.", paidpark.PayInZone1(total));
+                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())); 
+                
+
+                Console.WriteLine("====!!===== " + total);
+                Console.WriteLine("You can be parked for {0} time.",Math.Round(paidpark.PayInZone1(total)));
                 Console.WriteLine("Press zero(0) to stop counting.");
                 if (moneyMachine._cash == 0) { stop = false;}
             } while (stop == true);
@@ -200,6 +209,9 @@ namespace Menus
                 Console.WriteLine("ticket");
                 Console.WriteLine("----zone 1----");
                 Console.WriteLine(DateTime.Now);
+                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate._plateArrayZone1.Count());
+                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.novaLista.Count());
+                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.novaLista[0]);
                 Console.WriteLine("Car Plate: {0}", carPlateZone1);
                 Console.WriteLine("\nYou can be parked for {0} time.", paidpark.PayInZone1(total));
                 Console.WriteLine("Press X if you want to park another car,\nor press other key if you want to leave.");
@@ -242,7 +254,7 @@ namespace Menus
             //Ask the user for a Car Plate
             Console.WriteLine("Insert your Plate:");
             string carPlateZone2 = Console.ReadLine();
-            CarPlate newCarPlate = new CarPlate(carPlateZone2, carPlateZone2, carPlateZone2);
+           // CarPlate newCarPlate = new CarPlate("0", carPlateZone2, "0");
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
@@ -312,7 +324,7 @@ namespace Menus
             //Ask the user for a Car Plate
             Console.WriteLine("Insert your Plate:");
             string carPlateZone3 = Console.ReadLine();
-            CarPlate newCarPlate = new CarPlate(carPlateZone3, carPlateZone3, carPlateZone3);
+            //CarPlate newCarPlate = new CarPlate("0", "0", carPlateZone3);
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
