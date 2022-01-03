@@ -15,35 +15,46 @@ namespace Functionalities
         //Stores into the Arrays
         //Outputs a list of plates and a quantity of plate. 
 
-        //Receive Car Plates and store in the next variables.
-        public static string _carPlateZone1;
-        public string _carPlateZone2;
-        public string _carPlateZone3;
-
         //Creating an Array to store the plates.
-        public static string[] _plateArrayZone1 = new string[20];
-        public string[] _plateArrayZone2 = { };
-        public string[] _plateArrayZone3 = { };
-        public static List<string> novaLista = new List<string> { };
+        public static List<string> listaZona1 = new List<string> { };
+        public static List<string> listaZona2 = new List<string> { };
+        public static List<string> listaZona3 = new List<string> { };
 
 
-        //Stores the arrays.Length into a variable
-        public int carsInZone1 { get; set; }
-        public int carsInZone2 { get; set; }
-        public int carsInZone3 { get; set; }
+        //Atribute carsInZone, the value of the amount of cars (listaZona1.Count()) from the Zones List
+        public int carsInZone1 = listaZona1.Count();
+        public int carsInZone2 = listaZona2.Count();
+        public int carsInZone3 = listaZona3.Count();
+
+        //Stores the variable of occupied cars by Zone.
+        public static int CarsInZone1;
+        public static int CarsInZone2;
+        public static int CarsInZone3;
 
         //Atributes the arrays.Length variable to public satic variable
-        public static int CarsInZone1;
+        //public static int CarsInZone1;// NÃO É NECESSÁRIO
 
-        public static string tteste = "qwe";
+        //public static string tteste = "qwe"; NÃO É NECESSÁRIO
 
         //Atributing values to the current class from outside sources.
-        public CarPlate(string carPlateZone1)
+        /*public CarPlate1(string carPlateZone1)
         {
 
             _carPlateZone1 = carPlateZone1;
         }
-        
+
+        public CarPlate2(string carPlateZone2)
+        {
+
+            _carPlateZone2 = carPlateZone2;
+        }
+
+        public CarPlate3(string carPlateZone3)
+        {
+
+            _carPlateZone3 = carPlateZone3;
+        }*/
+
         /* string[] pallets = { "B14", "A11", "B12", "A13" };
            Console.WriteLine("");
 
@@ -55,73 +66,53 @@ namespace Functionalities
            } */
         //we can use this code to clear the car plates when the park is full, ref.:https://docs.microsoft.com/en-us/learn/modules/csharp-arrays-operations/3-exercise-clear-resize#code-try-9
 
-        
-        
+
+
         //Store and Counts Array elements for Zone1
-        /*public String [] GetCarPlateZone1(string _carPlateZone1) //Store a car plate into the array, in Zone1.
-        {
-            _plateArrayZone1 = new string[] { _carPlateZone1 };
-            Console.WriteLine("devia dar  " + _plateArrayZone1[0]);
-            return _plateArrayZone1;
-        }*/
-        public int occupiedSlotsZone1(string[] _plateArrayZone1) //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone1.
+
+        public void occupiedSlotsZone1() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone1.
         {
             //https://www.javatpoint.com/program-to-count-the-total-number-of-characters-in-a-string
 
-            if (_plateArrayZone1.Length < ZoneAvailability.carSlotsZone1)
+            if (carsInZone1 < ZoneAvailability.carSlotsZone1) //how to do a ramdom clear
             {
-                Console.WriteLine("---" + carsInZone1);
-                 carsInZone1 = carsInZone1 + 1;
+                carsInZone1 = carsInZone1 + 1;
             }
             else
             {
                 carsInZone1 = carsInZone1 - 1;
             }
             CarsInZone1 = carsInZone1;
-            return CarsInZone1;
-
         }
-        /*public static void occupiedZone1(int carsInZone1)
-        {
-            CarsInZone1 = carsInZone1;
-        }*/
+        //Store and Counts Array elements for Zone2
 
-        //Store and count Array elements for Zone2
-        public Array GetCarPlateZone2(string _carPlateZone2) //Store a car plate into the array, in Zone2.
+        public void occupiedSlotsZone2() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone2.
         {
-            _plateArrayZone2 = new string[] { _carPlateZone2 };
-            return _plateArrayZone2;
-        }
-        public int occupiedSlotsZone2(string _carPlateZone2) //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone2.
-        {
-            if (_carPlateZone2.Length < ZoneAvailability.carSlotsZone2)
+            if (carsInZone2< ZoneAvailability.carSlotsZone2)
             {
-                return carsInZone2 = carsInZone2 + 1;
+                carsInZone2 = carsInZone2 + 1;
             }
             else
             {
-                return carsInZone2 = carsInZone2 - 1;
+                carsInZone2 = carsInZone2 - 1;
             }
+            CarsInZone2 = carsInZone2;
         }
 
-        //Store and count Array elements for Zone3
-        public Array GetCarPlateZone3(string _carPlateZone3) //Store a car plate into the array, in Zone3.
+        //Store and Counts Array elements for Zone3
+        public void occupiedSlotsZone3() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone3.
         {
-            _plateArrayZone3 = new string[] { _carPlateZone3 };
-            return _plateArrayZone3;
-        }
-        public int occupiedSlotsZone3(string _carPlateZone3) //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone3.
-        {
-            if (_carPlateZone3.Length < ZoneAvailability.carSlotsZone3)
+
+            if (carsInZone2 < ZoneAvailability.carSlotsZone3)
             {
-                return carsInZone3 = carsInZone3 + 1;
+                carsInZone3 = carsInZone3 + 1;
             }
             else
             {
-                return carsInZone3 = carsInZone3 - 1;
-
+                carsInZone3 = carsInZone3 - 1;
             }
-        }
+            CarsInZone3 = carsInZone3;
+        }      
     }
 
     public class ZoneAvailability
@@ -136,30 +127,21 @@ namespace Functionalities
         public static int carSlotsZone3 = 70;
 
         //Quantity of cars in the zone
-        public int _numCarInZone1 { get; set; }
-        public int _numCarInZone2 { get; set; }
-        public int _numCarInZone3 { get; set; }
+        public static int _numOccupiedCarInZone1;
+        public static int _numOccupiedCarInZone2;
+        public static int _numOccupiedCarInZone3;
 
-        public ZoneAvailability(int carsInZone1, int carsInZone2, int carsInZone3)
+        public static void AvailableSlotsZone1() //Calculate the number of slots available a car in the Zone1.
         {
-            this._numCarInZone1 = carsInZone1;
-            this._numCarInZone2 = carsInZone2;
-            this._numCarInZone3 = carsInZone3;
-        }
-        public int AvailableSlotsZone1(int _numCarInZone1, int carSlotsZone1) //Calculate the number of slots available a car in the Zone1.
-        {
-            if (carSlotsZone1 - _numCarInZone1 == carSlotsZone1)
+            if (CarPlate.listaZona1.Count() == carSlotsZone1)
             {
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numCarInZone1, carSlotsZone1);
+                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone1) out of Free slots(carSlotsZone1).
+                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone1, carSlotsZone1);
                 AllMenus.ClientMenu();
-                carSlotsZone1 = carSlotsZone1 + 1;
-                return carSlotsZone1;
-
-            }
-            else
+            }else 
             {
-                return carSlotsZone1 - _numCarInZone1;
-            }
+                _numOccupiedCarInZone1 = ZoneAvailability.carSlotsZone1 - CarPlate.listaZona1.Count();
+            } 
         }
 
         public int AvailableSlotsZone2(int _numCarInZone2, int carSlotsZone2) //Calculate the number of slots available in the Zone2.
@@ -282,52 +264,42 @@ namespace Functionalities
     public class ParkPayment
     {
         //Zone Payments time rules
-        
 
-        //Zone1: 1.15 euros/h => max 45min
-        public double _timePerHourZone1 = 1.15/60;//Convert price per hour to price per minutes
+        //============================== Zone1: 1.15 euros/h => max 45min =================================
+        public double _timePerHourZone1 = 1.15;//Convert price per hour to price per minutes
         public double _maxMinutesInZone1 = 45;// Time already in minutes
-        public double _timePaidForZone1 { get; set; } //Stores the value Calculated by the function PayZone1()
-
-
-        //Zone2: 1.00 euros/h => max 2h
-        public double _timePerHourZone2 = 1.00/60;//Convert price per hour to price per minutes
-        public double _maxMinutesInZone2 = 2 * 60;//Convert time in minutes
-        private double MaxTimePaidInZone2 = ((1.00 * 120) / 60);// Calculates the maximum money to stay for 45min
-        public double _timePaidForZone2 { get; set; } //Stores the value Calculated by the function PayZone1()
-
-        //Zone3: 0.62 euros/h => unlimited time
-        public double _timePerHourZone3 = 0.62/60;//Convert price per hour to price per minutes
-        public double _timePaidForZone3 { get; set; } //Stores the value Calculated by the function PayZone1()
-
-        public double tempoZona1;
-        public double PayInZone1(double _addCash) //Payment for Zone 1
+        public double _timePaidForZone1;//Stores the value Calculated by the function PayInZone1()
+        public double PayInZone1(double _addCash) //Calculating the payment for Zone1
         {
-            Console.WriteLine("POOAWKAOw" + _addCash);
-            tempoZona1 = (_addCash * 45) / 1.15;
-            Console.WriteLine("Tempo !!!#!" + tempoZona1);
-            return tempoZona1;
+            //Console.WriteLine("POOAWKAOw" + _addCash);
+            _timePaidForZone1 = (_addCash * _maxMinutesInZone1) / _timePerHourZone1;
+            Console.WriteLine("Tempo !!!#!" + _timePaidForZone1);
+            return _timePaidForZone1;
         }
 
-        public double PayInZone2(double _addCash, double _timePerHourZone2, double _maxMinutesInZone2) //Payment for Zone 2
+
+        //============================== Zone2: 1.00 euros/h => max 2h =================================
+        public double _timePerHourZone2 = 1.00;//Convert price per hour to price per minutes
+        public double _maxMinutesInZone2 = 2 * 60;//Convert time in minutes (120 min = 2h * 60min)
+        public double _timePaidForZone2; //Stores the value Calculated by the function PayInZone2()
+        public double PayInZone2(double _addCash) //Calculating the payment for Zone2
         {
-            _timePaidForZone2 = ((_addCash * _maxMinutesInZone2) / _timePerHourZone2);
-            if (_timePaidForZone2 <= MaxTimePaidInZone2)
-            {
-                _timePaidForZone2 = ((_addCash * _maxMinutesInZone2) / _timePerHourZone2);
-                Console.WriteLine(_timePaidForZone2);
-                return _timePaidForZone2;
-            }
-            else
-            {
-                AllMenus.ClientMenu(); //Replace for Zone Menu
-                return _timePaidForZone2 = 0;
-            }
+            _timePaidForZone2 = (_addCash * _timePerHourZone2) / _timePerHourZone2;
+            Console.WriteLine("Tempo !!!#!" + _timePaidForZone2);
+            return _timePaidForZone2;
         }
 
-        public double PayInZone3(double _addCash, double _timePerHourZone3) //Payment for Zone 2
+
+        //============================== Zone3: 0.62 euros/h => unlimited time =================================
+        public double _timePerHourZone3 = 0.62;//Convert price per hour to price per minutes
+        public double _maxMinutesInZone3 = 60;//Convert time in minutes (60 min = 1h)
+        public double _timePaidForZone3; //Stores the value Calculated by the function PayInZone3()
+
+        public double PayInZone3(double _addCash) //Calculating the payment for Zone3
         {
-            return _timePaidForZone3 = (_addCash / _timePerHourZone3);
+            _timePaidForZone3 = (_addCash * _timePerHourZone3) / _maxMinutesInZone3;
+            Console.WriteLine("Tempo !!!#!" + _timePaidForZone3);
+            return _timePaidForZone3;
         }
     }
 }

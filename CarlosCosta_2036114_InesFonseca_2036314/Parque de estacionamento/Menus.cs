@@ -172,11 +172,9 @@ namespace Menus
             //Ask the user for a Car Plate
             Console.WriteLine("Insert your Plate:");
             string carPlateZone1 = Console.ReadLine();
-            // CarPlate newCarPlate = new CarPlate(carPlateZone1);
 
-            //CarPlate._plateArrayZone1[0] =  carPlateZone1;
 
-            CarPlate.novaLista.Add(carPlateZone1);
+            CarPlate.listaZona1.Add(carPlateZone1); //ALTERAR!!
 
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
@@ -184,23 +182,26 @@ namespace Menus
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
-            double total;
+            double total; //Variable to accept the same amount of cash inserted in the MoneyMachine method
             ParkPayment paidpark = new ParkPayment();
 
 
             do
             {
                 Console.WriteLine("\nInsert your cash:");
-                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())); 
-                
+                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
 
+                //FALTA!!!!!!!!
+                //definir os dias em que pode usar o park, DateTime... , colocar de 7 em 7 dias seria é domingo. 
                 Console.WriteLine("====!!===== " + total);
-                Console.WriteLine("You can be parked for {0} time.",Math.Round(paidpark.PayInZone1(total)));
+                Console.WriteLine("You can be parked for {0} time.",Math.Round(paidpark.PayInZone1(total))); //Returns the aproximated time for the amount of inserted coins
                 Console.WriteLine("Press zero(0) to stop counting.");
+
+                //mudar o if para tempo >= 45mim 
                 if (moneyMachine._cash == 0) { stop = false;}
             } while (stop == true);
 
-            //For Print ticket
+            //=============== When the user wants to Print a ticket =============== 
             Console.WriteLine("Do you want to print your ticket? \n yes(y) or no(n)");
             string ticket = Console.ReadLine(); //user input to navigate through the Menu
             if (ticket == "y")
@@ -209,9 +210,9 @@ namespace Menus
                 Console.WriteLine("ticket");
                 Console.WriteLine("----zone 1----");
                 Console.WriteLine(DateTime.Now);
-                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate._plateArrayZone1.Count());
-                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.novaLista.Count());
-                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.novaLista[0]);
+                //Console.WriteLine("array novo, devia dar matricula -> " + CarPlate._plateArrayZone1.Count());
+                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.listaZona1.Count());
+                Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.listaZona1[0]);
                 Console.WriteLine("Car Plate: {0}", carPlateZone1);
                 Console.WriteLine("\nYou can be parked for {0} time.", paidpark.PayInZone1(total));
                 Console.WriteLine("Press X if you want to park another car,\nor press other key if you want to leave.");

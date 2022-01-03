@@ -51,7 +51,7 @@ namespace ConsolePrint
             Console.WriteLine("Report zone [1]");
             Console.WriteLine("Report zone [2]");
             Console.WriteLine("Report zone [3]");
-            Console.WriteLine();//Total Money from the 3 Zones
+            Console.WriteLine();//Total Money from the 3 Zones ============FAZER!!!!!!!!!!!!!
             Console.WriteLine("Back to main menu [4]");
             Console.WriteLine("Stand By UI [0]");
         }
@@ -59,18 +59,14 @@ namespace ConsolePrint
         //Print report Zones for Admin
         public static void ReportZone1() //Zone1 
         {
-            // CarPlate car1 = new CarPlate("00", "00", "00");
-            // ZoneAvailability av1 = new ZoneAvailability(0, 0, 0);
-
             Console.WriteLine("\n >Report of the day: Zone1< ");
             Console.WriteLine(DateTime.Now);
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
-            Console.WriteLine("There are {0} Slots Available.", ZoneAvailability.carSlotsZone1);//Available Slots (50)
+            Console.WriteLine("There are {0} available slots.", ZoneAvailability.carSlotsZone1);//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
-            Console.WriteLine("-------");
-            Console.WriteLine("array novo, devia dar matricula -> " + (ZoneAvailability.carSlotsZone1 - CarPlate.novaLista.Count()));//Occupied Slots
+            Console.WriteLine("There are {0} ocupied slots", (ZoneAvailability.carSlotsZone1 - CarPlate.listaZona1.Count()));//Occupied Slots
             
-            Console.WriteLine(); //Cars that exceed the time allowed
+            Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine(" >End of Report< ");
             
         }
