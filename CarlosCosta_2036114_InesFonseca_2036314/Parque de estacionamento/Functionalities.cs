@@ -291,12 +291,12 @@ namespace Functionalities
 
         //============================== Zone2: 1.00 euros/h => max 2h =================================
         public double _timePerHourZone2 = 1.00;//Convert price per hour to price per minutes
-        public double _maxMinutesInZone2 = 2 * 60;//Convert time in minutes (120 min = 2h * 60min)
+        public double _maxMinutesInZone2 = 120;//Convert time in minutes (120 min = 2h * 60min)
         public double _timePaidForZone2; //Stores the value Calculated by the function PayInZone2()
         public double PayInZone2(double _addCash) //Calculating the payment for Zone2
         {
-            _timePaidForZone2 = (_addCash * _timePerHourZone2) / _timePerHourZone2;
-            Console.WriteLine("Tempo !!!#!" + _timePaidForZone2);
+            _timePaidForZone2 = (_addCash * _maxMinutesInZone2) / _timePerHourZone2;
+            //Console.WriteLine("Tempo !!!#!" + _timePaidForZone2);
             return _timePaidForZone2;
         }
 
@@ -308,8 +308,8 @@ namespace Functionalities
 
         public double PayInZone3(double _addCash) //Calculating the payment for Zone3
         {
-            _timePaidForZone3 = (_addCash * _timePerHourZone3) / _maxMinutesInZone3;
-            Console.WriteLine("Tempo !!!#!" + _timePaidForZone3);
+            _timePaidForZone3 = (_addCash * _maxMinutesInZone3) / _timePerHourZone3;
+            //Console.WriteLine("Tempo !!!#!" + _timePaidForZone3);
             return _timePaidForZone3;
         }
     }

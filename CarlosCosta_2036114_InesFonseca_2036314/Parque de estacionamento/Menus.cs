@@ -161,7 +161,7 @@ namespace Menus
            Console.WriteLine("Please, choose only the numbers available in the script");
         }
 
-        //Zones for Client
+        //============================================= Zones for Client =============================================//
         public static void Zone1() //Zone1 Interactive Menu
         {
             Console.Clear();
@@ -299,22 +299,74 @@ namespace Menus
             //Ask the user for a Car Plate
             Console.WriteLine("Insert your Plate:");
             string carPlateZone2 = Console.ReadLine();
-           // CarPlate newCarPlate = new CarPlate("0", carPlateZone2, "0");
+
+
+            CarPlate.listaZona2.Add(carPlateZone2); //ALTERAR!!
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
-            double total = moneyMachine._addCash;
+            double total; //Variable to accept the same amount of cash inserted in the MoneyMachine method
             ParkPayment paidpark = new ParkPayment();
 
             do
             {
                 Console.WriteLine("\nInsert your cash:");
-                moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                Console.WriteLine("You can be parked for {0} time.", paidpark.PayInZone1(total));
-                Console.WriteLine("Press zero(0) if you want to stop counting.");
+                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+
+
+                if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20)
+                    {
+                        if (paidpark.PayInZone2(total) <= 120)
+                        {
+                            Console.WriteLine(DateTime.Now);
+                            Console.WriteLine("You have now paid for {0} minutes.", Math.Round(paidpark.PayInZone2(total)));
+                            Console.WriteLine("You can be parked until: {0}", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
+                            Console.WriteLine("Press zero(0) to stop counting.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can only be parked for 2 hours máx! Don´t print the ticket to receive a refund.");
+                            stop = false;
+                        }
+                    }
+                    else
+                    {
+                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14)
+                        {
+                            if (paidpark.PayInZone2(total) <= 120)
+                            {
+                                Console.WriteLine(DateTime.Now);
+                                Console.WriteLine("You have now paid for {0} minutes.", Math.Round(paidpark.PayInZone2(total)));
+                                Console.WriteLine("You can be parked until: {0}", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
+                                Console.WriteLine("Press zero(0) to stop counting.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can only be parked for 2 hours máx! Don´t print the ticket to receive a refund.");
+                                stop = false;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can Park for Free before 9 and after 20h. You will be refunded!");
+                            stop = false;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You can Park for Free on Sundays.\nIf you inserted money you will be refounded!");
+                    stop = false;
+                }
+
+                /*moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                Console.WriteLine("You can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
+                Console.WriteLine("Press zero(0) if you want to stop counting.");*/
                 if (moneyMachine._cash == 0) { stop = false; }
             } while (stop == true);
 
@@ -328,7 +380,7 @@ namespace Menus
                 Console.WriteLine("----zone 2----");
                 Console.WriteLine(DateTime.Now);
                 Console.WriteLine("Car Plate: {0}", carPlateZone2);
-                Console.WriteLine("\nYou can be parked for {0} time.", paidpark.PayInZone1(total));
+                Console.WriteLine("\nYou can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
                 Console.WriteLine("Press X if you want to park another car,\nor press other key if you want to leave.");
 
                 string done = Console.ReadLine();
@@ -379,10 +431,118 @@ namespace Menus
             double total = moneyMachine._addCash;
             ParkPayment paidpark = new ParkPayment();
 
+            //TimeSpan to change date based on paid hours
+            //https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=net-6.0
+            //https://docs.microsoft.com/en-us/dotnet/api/system.timespan.days?view=net-6.0
+            //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.subtract?view=net-6.0
+
+            int days = 0;
+            int hour = 0;
+            int minute = 0;
+            int second = 0;
+            TimeSpan timeSpan;
+
+            int PaidTotalTime;
+
             do
             {
-                //Console.WriteLine("You can be parked for {0} minutes.", );
+                Console.WriteLine("\nInsert your cash:");
+                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                PaidTotalTime = Convert.ToInt32(Math.Round(paidpark.PayInZone3(total)));
+
+                //======== Calculate time ======
+                /*if (paidpark.PayInZone3(total) < 60)
+                {
+                    minute = PaidTotalTime;
+                }
+                if (paidpark.PayInZone3(total) == 60)
+                {
+                    hour += 1;
+
+                    if(hour > 0 && PaidTotalTime < 60) 
+                    {
+                        
+                        minute = PaidTotalTime - 60;
+                    }
+                    else 
+                    {
+                        hour += 1;
+                        minute = PaidTotalTime - 60;
+                    }
+                }
+                if (paidpark.PayInZone3(total) >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
+                {
+                    days += 1;
+                    PaidTotalTime = PaidTotalTime - 1440;
+                }
+                timeSpan = new TimeSpan(days, hour, minute, second);*/
+
+                for(int i = 0; i < paidpark.PayInZone3(total); i++) 
+                {
+                    if (paidpark.PayInZone3(total) < 60)
+                    {
+                        minute = PaidTotalTime;
+                    }
+                    if (paidpark.PayInZone3(total) == 60)
+                    {
+                        hour += 1;
+                    }
+                    if (paidpark.PayInZone3(total) >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
+                    {
+                        days += 1;
+                        PaidTotalTime = PaidTotalTime - 1440;
+                    }
+
+                }
+                timeSpan = new TimeSpan(days, hour, minute, second);
+
+                /*if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20) //Week schedule
+                    {
+                        Console.WriteLine(DateTime.Now);
+                        Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
+                        Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
+                        Console.WriteLine("Press zero(0) to stop counting.");
+
+                    }
+                    else
+                    {
+                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14) //Saturdays Open Hours
+                        {
+                            Console.WriteLine(DateTime.Now);
+                            Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
+                            Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
+                            Console.WriteLine("Press zero(0) to stop counting.");
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("You can Park for Free before 9 and after 20h. You will be refunded!");
+                            stop = false;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(DateTime.Now);
+                    Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
+                    Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
+                    Console.WriteLine("Press zero(0) to stop counting.");
+                }*/
+
+
+                //ALERT DONT DELETE!!!
+                Console.WriteLine(DateTime.Now);
+                Console.WriteLine("You have now paid for {0} minutes.", Math.Round(paidpark.PayInZone3(total))); //===!!!=!=!=!
+                Console.WriteLine("You can be parked until: {0}", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));//DateTime.Now.Add(timeSpan));
                 Console.WriteLine("Press zero(0) to stop counting.");
+
+
+
+                /*moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                Console.WriteLine("You can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
+                Console.WriteLine("Press zero(0) if you want to stop counting.");*/
                 if (moneyMachine._cash == 0) { stop = false; }
             } while (stop == true);
 
@@ -396,7 +556,7 @@ namespace Menus
                 Console.WriteLine("----zone 3----");
                 Console.WriteLine(DateTime.Now);
                 Console.WriteLine("Car Plate: {0}", carPlateZone3);
-                Console.WriteLine("\nYou can be parked for {0} time.", paidpark.PayInZone1(total));
+                Console.WriteLine("\nYou can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
                 Console.WriteLine("Press X if you want to park another car,\nor press other key if you want to leave.");
 
                 string done = Console.ReadLine();
@@ -427,7 +587,7 @@ namespace Menus
             }
         }
 
-        //Zones for the Admin
+        //============================================= Zones for the Admin =============================================//
         //Need to create a now void with switch, otherwise the program go to start();
         public static void ZoneAdmin1() //Admin report for Zone1
         {
