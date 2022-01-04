@@ -62,9 +62,9 @@ namespace ConsolePrint
             Console.WriteLine("\n >Report of the day: Zone1< ");
             Console.WriteLine(DateTime.Now);
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
-            Console.WriteLine("There are {0} available slots.", ZoneAvailability.carSlotsZone1);//Available Slots (50)
+            Console.WriteLine("There are {0} available slots.", CarPlate.carSlotsZone1 - CarPlate.listaZona1.Count());//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
-            Console.WriteLine("There are {0} ocupied slots", (ZoneAvailability.carSlotsZone1 - CarPlate.listaZona1.Count()));//Occupied Slots
+            Console.WriteLine("There are {0} ocupied slots", CarPlate.listaZona1.Count());//Occupied Slots
             
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine(" >End of Report< ");

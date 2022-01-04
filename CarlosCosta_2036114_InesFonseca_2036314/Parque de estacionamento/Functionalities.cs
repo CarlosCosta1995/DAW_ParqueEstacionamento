@@ -26,6 +26,11 @@ namespace Functionalities
         public int carsInZone2 = listaZona2.Count();
         public int carsInZone3 = listaZona3.Count();
 
+        //Define and atribute variables for each zone
+        public static int carSlotsZone1 = 50;
+        public static int carSlotsZone2 = 100;
+        public static int carSlotsZone3 = 70;
+
         //Stores the variable of occupied cars by Zone.
         public static int CarsInZone1;
         public static int CarsInZone2;
@@ -142,37 +147,36 @@ namespace Functionalities
             {
                 _numOccupiedCarInZone1 = ZoneAvailability.carSlotsZone1 - CarPlate.listaZona1.Count();
             } 
+
+           // return _numOccupiedCarInZone1;
         }
 
-        public int AvailableSlotsZone2(int _numCarInZone2, int carSlotsZone2) //Calculate the number of slots available in the Zone2.
+        public  void AvailableSlotsZone2() //Calculate the number of slots available in the Zone2.
         {
-            if (carSlotsZone2 - _numCarInZone2 == carSlotsZone2)
-            {
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numCarInZone2, carSlotsZone2);
-                AllMenus.ClientMenu();
-                carSlotsZone2 = carSlotsZone2 + 1;
-                return carSlotsZone2;
 
+            if (CarPlate.listaZona2.Count() == carSlotsZone2)
+            {
+                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone2) out of Free slots(carSlotsZone2).
+                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone2, carSlotsZone2);
+                AllMenus.ClientMenu();
             }
             else
             {
-                return carSlotsZone2 - _numCarInZone2;
+                _numOccupiedCarInZone2 = ZoneAvailability.carSlotsZone2 - CarPlate.listaZona2.Count();
             }
         }
 
-        public int CountingCarsZone3(int _numCarInZone3, int carSlotsZone3) //Calculate the number of slots available in the Zone3.
+        public void CountingCarsZone3() //Calculate the number of slots available in the Zone3.
         {
-            if (carSlotsZone3 - _numCarInZone3 == carSlotsZone3)
+            if (CarPlate.listaZona3.Count() == carSlotsZone3)
             {
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numCarInZone3, carSlotsZone3);
+                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone3) out of Free slots(carSlotsZone3).
+                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone3, carSlotsZone3);
                 AllMenus.ClientMenu();
-                carSlotsZone3 = carSlotsZone3 + 1;
-                return carSlotsZone3;
-
             }
             else
             {
-                return carSlotsZone3 - _numCarInZone3;
+                _numOccupiedCarInZone3 = ZoneAvailability.carSlotsZone3 - CarPlate.listaZona3.Count();
             }
         }
 
@@ -271,10 +275,17 @@ namespace Functionalities
         public double _timePaidForZone1;//Stores the value Calculated by the function PayInZone1()
         public double PayInZone1(double _addCash) //Calculating the payment for Zone1
         {
+            //Verificar o dia da semana, e horario de estacionamento DONE!
+            //Tempo maximo limite dos 45 DONE!
+            //Somar os minutos do resultado com a data e hora actual. DONE!
+            //[extra]o restante addicionar ao dia seguinte ZONA3
+
+
             //Console.WriteLine("POOAWKAOw" + _addCash);
             _timePaidForZone1 = (_addCash * _maxMinutesInZone1) / _timePerHourZone1;
-            Console.WriteLine("Tempo !!!#!" + _timePaidForZone1);
+            //Console.WriteLine("Tempo !!!#!" + _timePaidForZone1);
             return _timePaidForZone1;
+            
         }
 
 
