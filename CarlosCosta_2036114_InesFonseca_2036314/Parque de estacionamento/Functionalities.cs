@@ -308,7 +308,7 @@ namespace Functionalities
 
         public double PayInZone3(double _addCash) //Calculating the payment for Zone3
         {
-            _timePaidForZone3 = (_addCash * _maxMinutesInZone3) / _timePerHourZone3;
+            _timePaidForZone3 = (_addCash * _maxMinutesInZone3) / _timePerHourZone3; // (20.00 * 0.62) / 60;
             //Console.WriteLine("Tempo !!!#!" + _timePaidForZone3);
             return _timePaidForZone3;
         }
