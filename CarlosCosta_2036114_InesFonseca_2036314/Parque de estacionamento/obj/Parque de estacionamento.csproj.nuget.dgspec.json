@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Net16\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj": {}
+    "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Net16\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj": {
+    "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Net16\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
         "projectName": "Parque de estacionamento",
-        "projectPath": "C:\\Users\\Net16\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
-        "packagesPath": "C:\\Users\\Net16\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Net16\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\obj\\",
+        "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Net16\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

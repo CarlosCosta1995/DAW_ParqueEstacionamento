@@ -439,25 +439,31 @@ namespace Menus
             double total = moneyMachine._addCash;
             ParkPayment paidpark = new ParkPayment();
 
+            Schedule newSchedule = new Schedule();
+
+
             //TimeSpan to change date based on paid hours
             //https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=net-6.0
             //https://docs.microsoft.com/en-us/dotnet/api/system.timespan.days?view=net-6.0
             //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.subtract?view=net-6.0
 
-            int days = 0;
-            int hour = 0;
-            int minute = 0;
-            int second = 0;
-            TimeSpan timeSpan;
+            /* int days = 0;
+             int hour = 0;
+             int minute = 0;
+             int second = 0;
+             TimeSpan timeSpan;
 
-            int PaidTotalTime;
-            object dataNow;
+             int PaidTotalTime;*/
+
             do
             {
                 Console.WriteLine("\nInsert your cash:");
                 total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                PaidTotalTime = Convert.ToInt32(Math.Round(paidpark.PayInZone3(total)));
-               
+                //PaidTotalTime = Convert.ToInt32(Math.Round(paidpark.PayInZone3(total))); //ja nao é necessário
+                newSchedule.CalculateTime(total); //Calculate time
+                newSchedule.ScheduleForZone(newSchedule.Day, newSchedule.Hour, newSchedule.Minute, newSchedule.Second); //ADD the time calculated to the schedule
+
+                //Console.WriteLine("Tempo Calculado: {0}dias, {1}hora, {2}min, {3}sec.", newSchedule.Day, newSchedule.Hour, newSchedule.Minute, newSchedule.Second);
 
                 //======== Calculate time ======
                 /*if (paidpark.PayInZone3(total) < 60)
@@ -487,7 +493,7 @@ namespace Menus
                 timeSpan = new TimeSpan(days, hour, minute, second);*/
 
 
-                while (PaidTotalTime > 0) {
+                /*while (PaidTotalTime > 0) {
 
                     if (PaidTotalTime >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
                     {
@@ -506,7 +512,10 @@ namespace Menus
                     }
 
                 }
-                timeSpan = new TimeSpan(days, hour, minute, second);
+                timeSpan = new TimeSpan(days, hour, minute, second);*/
+
+
+               // DateTime nextDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 9, 0, 0);
 
                 /*if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
                 {
@@ -563,8 +572,6 @@ namespace Menus
 
                 //span = TimeZoneInfo.ConvertTimeToUtc(Realtime) - diaSeguinte;
                 //unixTimestamp = span.TotalHours;
-
-
 
                 Console.WriteLine("===!!=!=!=!=!=!=!" + Nova);*/
 
