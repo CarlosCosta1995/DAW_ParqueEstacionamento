@@ -420,12 +420,12 @@ namespace Functionalities
 
             if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour <= 20) 
             {
-                if (_dateAtOpen.CompareTo(_dateForTimeCount) >= 0 || _dateAtClose.CompareTo(_dateForTimeCount) <= 0)
+                if (_dateForTimeCount.CompareTo(_dateAtClose) <= 0)
                 {
                     _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
                     Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
                 }
-                else if (_dateAtClose.CompareTo(_dateForTimeCount) >= 1)
+                else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
                 {
                     _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
                     _dateForTimeCount = _dateForTimeCount.Subtract(_comparedTime);
