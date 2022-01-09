@@ -200,12 +200,10 @@ namespace Functionalities
         public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 }; 
         //change coins: can´t accept more than 50 cent because- zone1 max. 45 min which is up to 85 cent - zone2 max 1h which is up to 2€
         //define what happens when the client uses other coins, letters or negative numbers
-        
-        private double _addMoney;
         public double AddMoney 
         {
-            get { return _addMoney; }
-            set { _addMoney = value; }
+            get { return _addCash; }
+            set { _addCash = value; }
         }
        
         public double insertingCash(double amount) //Asks the user to insert an amount of money
@@ -217,7 +215,7 @@ namespace Functionalities
             if (acceptedCash.Contains(amount))
             {
                 Console.WriteLine("\nYou insert {0} €\n", amount);
-                _cash = amount;
+                _cash += amount;
             }
             else
             {
@@ -332,15 +330,19 @@ namespace Functionalities
         //================= Atributs ===============================
         private static List<int> _dayOfWeek = new List<int> {0, 1, 2, 3, 4, 5, 6 };
 
-        private double _timePaid;
+        //private double _timePaid;
         private double _days;
         private double _hour;
         private double _minute;
-        private double _second;
+        private double _second = 0;
+        private double timeConvertMinutes;
 
-        private TimeSpan _restOfTime;
-        private DateTime _dateForTimeCount = DateTime.Now;
-        
+        //private DateTime _dateForTimeCount = new DateTime();
+        //DateTime _dateAtOpen = new DateTime();
+        //DateTime _dateAtClose = new DateTime();
+        //public TimeSpan _TimePaid;
+
+
 
         //================= Selector and Properties ==============================
         /*public List<int> DayOfWeek 
@@ -361,9 +363,7 @@ namespace Functionalities
             this._days = new double();
             this._hour = new double();
             this._minute = new double();
-            this._second = 0;
-
-            this._timePaid = new double();
+            this._second = new double();
         }
 
         public double Day 
@@ -390,6 +390,7 @@ namespace Functionalities
             set { _second = value; }
         }
 
+
         //=================== Methods =============================== seg a sex => 9h-20h // sab => 9h-14h //Doming => for free!?
         public void CalculateTime(double _timePaid)
         {
@@ -408,62 +409,111 @@ namespace Functionalities
                 }
                 else if (_timePaid < 60)
                 {
-                    _minute = Convert.ToInt32(_timePaid);
+                    _minute = _timePaid;
                 }
             }
         }
-        public void ScheduleForZone(double day, double hour, double minute, double second) 
+        public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute) 
         {
-            DateTime _dateAtOpen = new DateTime(_dateForTimeCount.Year, _dateForTimeCount.Month, _dateForTimeCount.Day, 9, 0, 0);
-            DateTime _dateAtClose = new DateTime(_dateForTimeCount.Year, _dateForTimeCount.Month, _dateForTimeCount.Day, 20, 0, 0);
-            TimeSpan _comparedTime;
 
-            if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour <= 20) 
-            {
-                if (_dateForTimeCount.CompareTo(_dateAtClose) <= 0)
-                {
-                    _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                    Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
-                }
-                else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
-                {
-                    _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
-                    _dateForTimeCount = _dateForTimeCount.Subtract(_comparedTime);
-                    Console.WriteLine("You exceed the park open hours!");
-                    Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
+            timeConvertMinutes = minute + (hour * 60) + (day * 1440);
 
-                    _dateForTimeCount = _dateForTimeCount.AddHours(13);
-                    _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                    Console.WriteLine("Now, you must park from {0} to {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
-                }
-                /*else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
+            for (int i = 0;  timeConvertMinutes > i; timeConvertMinutes--)
+            {
+                
+                if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
                 {
-                    _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                    _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
-                    _dateForTimeCount = _dateForTimeCount.AddHours(13);
-                    _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                    Console.WriteLine("ADD UM DIA!!!!" + _dateForTimeCount);
+                    _dateForTimeCount.AddMinutes(1);
+                    //timeConvertMinutes--;
+                    Console.WriteLine("Addicionando minutos" + _dateForTimeCount);
                 }
-                else 
+                else if (_dateForTimeCount.Hour >= 20) 
                 {
-                    Console.WriteLine("ADD MINUTOS E HORAS!!!!" + _dateForTimeCount);
-                    Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
-                }*/
+                    _dateForTimeCount.AddHours(13);
+                    _dateForTimeCount.AddMinutes(1);
+                    //timeConvertMinutes--;
+                    Console.WriteLine("Addicionando um dia e os minutos" + _dateForTimeCount); 
+                } 
+            } //while (timeConvertMinutes > 0) ;
+            
+            Console.WriteLine("\n data final==!! " + _dateForTimeCount);
+            return _dateForTimeCount;
 
-            }
-            else if(_dateForTimeCount.Hour < 9 || _dateForTimeCount.Hour > 20) 
+
+
+            /*
+            //_dateAtOpen = _dateForTimeCount;
+            //_dateAtClose =_dateForTimeCount.Add(_paidTime);
+        
+            if((int)_dateForTimeCount.DayOfWeek == _dayOfWeek[0] && (_dateForTimeCount.Hour >= 9 || _dateForTimeCount.Hour < 16))
             {
-                Console.WriteLine("The park is closed!\n Your time will be add for tomorrow!");
-                Console.WriteLine("Current time:" + _dateForTimeCount);
-                _comparedTime = _dateAtOpen.Subtract(_dateForTimeCount);
-                _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                Console.WriteLine("Now, you must park from {0}, until {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
+                _dateForTimeCount.AddDays(day);
+                _dateForTimeCount.AddHours(hour);
+                _dateForTimeCount.AddMinutes(minute);
+                Console.WriteLine("time add to date " + _dateForTimeCount);
             }
-            else
+            else if ((int)_dateForTimeCount.DayOfWeek == _dayOfWeek[6] && (_dateForTimeCount.Hour >= 9 || _dateForTimeCount.Hour < 14)) 
             {
-                Console.WriteLine("FDSA" + _dateForTimeCount);
+                _dateForTimeCount.AddHours(hour);
+                _dateForTimeCount.AddMinutes(minute);
+                Console.WriteLine("\ntime add to date " + _dateForTimeCount);
             }
+            else if((int)_dateForTimeCount.DayOfWeek != _dayOfWeek[0])
+            {
+                _dateForTimeCount.AddHours(6 + 9);
+                Console.WriteLine("\nADD tempo par aoutro dia");
+            }*/
+
+
+
+
+            /*
+                        if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour <= 20) 
+                        {
+                            if (_dateForTimeCount.CompareTo(_dateAtClose) <= 0)
+                            {
+                                _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
+                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
+                            }
+                            else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
+                            {
+                                _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
+                                _dateForTimeCount = _dateForTimeCount.Subtract(_comparedTime);
+                                Console.WriteLine("You exceed the park open hours!");
+                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
+
+                                _dateForTimeCount = _dateForTimeCount.AddHours(13);
+                                _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
+                                Console.WriteLine("Now, you must park from {0} to {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
+                            }
+                            /*else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
+                            {
+                                _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
+                                _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
+                                _dateForTimeCount = _dateForTimeCount.AddHours(13);
+                                _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
+                                Console.WriteLine("ADD UM DIA!!!!" + _dateForTimeCount);
+                            }
+                            else 
+                            {
+                                Console.WriteLine("ADD MINUTOS E HORAS!!!!" + _dateForTimeCount);
+                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
+                            }
+
+                        }
+                        else if(_dateForTimeCount.Hour < 9 || _dateForTimeCount.Hour > 20) 
+                        {
+                            Console.WriteLine("The park is closed!\n Your time will be add for tomorrow!");
+                            Console.WriteLine("Current time:" + _dateForTimeCount);
+                            _comparedTime = _dateAtOpen.Subtract(_dateForTimeCount);
+                            _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
+                            _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
+                            Console.WriteLine("Now, you must park from {0}, until {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
+                        }
+                        else
+                        {
+                            Console.WriteLine("FDSA" + _dateForTimeCount);
+                        }*/
             /*
             if ((int)DateTime.Now.DayOfWeek != _dayOfWeek[0] || (int)DateTime.Now.DayOfWeek != _dayOfWeek[6]) //durante a Semana
             {

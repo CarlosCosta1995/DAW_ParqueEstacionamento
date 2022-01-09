@@ -381,7 +381,7 @@ namespace Menus
             //For Print ticket
             Console.WriteLine("Do you want to print your ticket? \n yes(y) or no(n)");
             string ticket = Console.ReadLine(); //user input to navigate through the Menu
-            if (ticket == "y")
+            if (ticket == "y") //ALERTA ISTO NAO PODE ACONTECER NOS DOMINGOS! DAR A DATA DE DOMINGO E CONTAR ATE ONDE ESTACIONA
             {
                 Console.Clear();
                 Console.WriteLine("ticket");
@@ -436,9 +436,8 @@ namespace Menus
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
-            double total = moneyMachine._addCash;
+            double total;
             ParkPayment paidpark = new ParkPayment();
-
             Schedule newSchedule = new Schedule();
 
 
@@ -449,22 +448,29 @@ namespace Menus
 
             /* int days = 0;
              int hour = 0;
-             int minute = 0;
+             
              int second = 0;
-             TimeSpan timeSpan;
+            TimeSpan timeSpan;*/
 
-             int PaidTotalTime;*/
-
+            DateTime _startingDate = DateTime.Now;
+            DateTime _loopDate = new DateTime();
+            _loopDate = _startingDate;
+            
             do
             {
+                
                 Console.WriteLine("\nInsert your cash:");
-                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                //PaidTotalTime = Convert.ToInt32(Math.Round(paidpark.PayInZone3(total))); //ja nao é necessário
+                total = paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())));
+                Console.WriteLine("total variable " + total);
+
                 newSchedule.CalculateTime(total); //Calculate time
-                newSchedule.ScheduleForZone(newSchedule.Day, newSchedule.Hour, newSchedule.Minute, newSchedule.Second); //ADD the time calculated to the schedule
+                Console.WriteLine("{0}date ,{1}d , {2}h, {3}m", _startingDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
+
+                _loopDate = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);//ADD the time calculated to the schedule
+                Console.WriteLine("DATA de actualiza????? " + _loopDate);
 
                 //Console.WriteLine("Tempo Calculado: {0}dias, {1}hora, {2}min, {3}sec.", newSchedule.Day, newSchedule.Hour, newSchedule.Minute, newSchedule.Second);
-
+               
                 //======== Calculate time ======
                 /*if (paidpark.PayInZone3(total) < 60)
                 {
@@ -515,7 +521,7 @@ namespace Menus
                 timeSpan = new TimeSpan(days, hour, minute, second);*/
 
 
-               // DateTime nextDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 9, 0, 0);
+                // DateTime nextDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 9, 0, 0);
 
                 /*if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
                 {
@@ -579,7 +585,7 @@ namespace Menus
                 //Se o dateTime.Now = domingo a qualquer hora entre as 00h (sabado) e as 24h (domingo)
                 //https://iditect.com/guide/csharp/csharp_howto_convert_datetime.html
                 //https://stackoverflow.com/questions/8702603/merging-two-objects-in-c-sharp
-               
+
 
 
 
