@@ -418,25 +418,34 @@ namespace Functionalities
 
             timeConvertMinutes = minute + (hour * 60) + (day * 1440);
 
+            DateTime novo = DateTime.Now;
+            int conta = 0;
+
             for (int i = 0;  timeConvertMinutes > i; timeConvertMinutes--)
             {
                 
                 if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
                 {
-                    _dateForTimeCount.AddMinutes(1);
+
+                    // _dateForTimeCount.AddMinutes(1);
                     //timeConvertMinutes--;
-                    Console.WriteLine("Addicionando minutos" + _dateForTimeCount);
+                    conta++;
+                    Console.WriteLine("if ddicionando minutos" + conta );
                 }
                 else if (_dateForTimeCount.Hour >= 20) 
                 {
                     _dateForTimeCount.AddHours(13);
                     _dateForTimeCount.AddMinutes(1);
+                    conta++;
                     //timeConvertMinutes--;
-                    Console.WriteLine("Addicionando um dia e os minutos" + _dateForTimeCount); 
+                    Console.WriteLine(" else Adicionando um dia e os minutos" + _dateForTimeCount); 
                 } 
+                else { }
             } //while (timeConvertMinutes > 0) ;
-            
-            Console.WriteLine("\n data final==!! " + _dateForTimeCount);
+
+
+            _dateForTimeCount.AddMinutes(conta);
+            Console.WriteLine("\n data final==!! " + _dateForTimeCount.AddMinutes(conta));
             return _dateForTimeCount;
 
 
