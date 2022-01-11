@@ -210,12 +210,12 @@ namespace Functionalities
             //https://stackoverflow.com/questions/61448526/java-checking-if-a-variable-is-equal-to-any-of-the-array-elements
             if (acceptedCash.Contains(amount))
             {
-                Console.WriteLine("\nYou insert {0} €\n", amount);
+                Console.WriteLine("\n>>>You inserted {0} €\n", amount);
                 _cash = amount;
             }
             else
             {
-                Console.WriteLine("\nYou insert {0} €", amount);
+                Console.WriteLine("\nYou insert {0} €\n", amount);
                 Console.WriteLine("You money is not accepted by the machine!");
                 Console.WriteLine("The coins accepted are {0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50} cents and {1.00, 2.00, 5.00, 10.00, 20.00} euros. \n");
             }
@@ -239,7 +239,7 @@ namespace Functionalities
 
         public void refundCash() //Gives the feeback of the amount inserted, reset the cash and subtracts the amount returned.
         {
-            Console.WriteLine("Refounding {0} euros", _addCash);
+            Console.WriteLine("               >>>Refunding {0} euros      ", _addCash);
             if (_machineTotalAmount != 0)
             {
                 _machineTotalAmount -= _addCash;
