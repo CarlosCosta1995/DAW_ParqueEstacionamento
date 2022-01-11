@@ -328,7 +328,7 @@ namespace Functionalities
          * */
 
         //================= Atributs ===============================
-        private static List<int> _dayOfWeek = new List<int> {0, 1, 2, 3, 4, 5, 6 };
+        private static List<int> _dayOfWeek = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
 
         //private double _timePaid;
         private double _days;
@@ -366,27 +366,27 @@ namespace Functionalities
             this._second = new double();
         }
 
-        public double Day 
+        public double Day
         {
-           get { return _days;}
-           set { _days = value; }
+            get { return _days; }
+            set { _days = value; }
         }
 
-        public double Hour 
-        { 
-            get { return _hour;}
+        public double Hour
+        {
+            get { return _hour; }
             set { _hour = value; }
         }
 
         public double Minute
         {
-            get { return _minute;}
+            get { return _minute; }
             set { _minute = value; }
         }
 
         public double Second
         {
-            get { return _second;}
+            get { return _second; }
             set { _second = value; }
         }
 
@@ -394,7 +394,7 @@ namespace Functionalities
         //=================== Methods =============================== seg a sex => 9h-20h // sab => 9h-14h //Doming => for free!?
         public void CalculateTime(double _timePaid)
         {
-            for(int i = 0; i < _timePaid; i++)
+            for (int i = 0; i < _timePaid; i++)
             {
                 //Console.WriteLine("TimePaid" + _timePaid);
                 if (_timePaid >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
@@ -413,9 +413,57 @@ namespace Functionalities
                 }
             }
         }
-        public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute) 
+        public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute)
         {
+            int _todayDay = _dateForTimeCount.Day;
+            int _todayHour = _dateForTimeCount.Hour;
+            int _todayMinute = _dateForTimeCount.Minute;
 
+            //Hour Open and closed
+            int _openHour = 9;
+            int _closeHour = 20;
+            int _closeSaturdaysHour = 14;
+            
+            while(day > 0)
+            {
+                if (_todayDay != _dayOfWeek[6] || _todayDay != _dayOfWeek[0])
+                {
+                    _dateForTimeCount.AddDays(1);
+                    day--;
+                }
+                else if(_dayOfWeek[6] == 6) 
+                {
+                    _dateForTimeCount.AddDays(1);
+                    day--;
+                }
+                else 
+                {
+                    _dateForTimeCount.AddDays(1);
+                    day--;
+                }
+            }
+
+            while(hour > 0) 
+            {
+                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0] && _todayHour > _openHour && _todayHour < _closeHour)
+                {
+                    _dateForTimeCount.AddHours(1);
+                    hour--;
+                }
+                else if (_dayOfWeek[6] == 6 && _todayHour > _openHour && _todayHour < _closeSaturdaysHour)
+                {
+                    _dateForTimeCount.AddHours(1);
+                    hour--;
+                }
+                else
+                {
+                    _dateForTimeCount.AddHours(13);
+                }
+            }
+
+            return _dateForTimeCount;
+
+            /*
             timeConvertMinutes = minute + (hour * 60) + (day * 1440);
 
             DateTime novo = DateTime.Now;
@@ -441,12 +489,12 @@ namespace Functionalities
                     Console.WriteLine(" else Adicionando um dia e os minutos" + _dateForTimeCount); 
                 } 
                 else { }
-            } //while (timeConvertMinutes > 0) ;
+            } //while (timeConvertMinutes > 0) ; 
 
 
             _dateForTimeCount.AddMinutes(conta);
             Console.WriteLine("\n data final==!! " + _dateForTimeCount.AddMinutes(conta));
-            return _dateForTimeCount;
+            return _dateForTimeCount;*/
 
 
 
