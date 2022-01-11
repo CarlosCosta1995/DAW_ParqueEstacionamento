@@ -424,7 +424,7 @@ namespace Functionalities
             int _closeHour = 20;
             int _closeSaturdaysHour = 14;
             
-            while(day > 0)
+            /*while(day > 0)
             {
                 if (_todayDay != _dayOfWeek[6] || _todayDay != _dayOfWeek[0])
                 {
@@ -441,24 +441,26 @@ namespace Functionalities
                     _dateForTimeCount.AddDays(1);
                     day--;
                 }
-            }
+            }*/
 
             while(hour > 0) 
             {
                 if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0] && _todayHour > _openHour && _todayHour < _closeHour)
                 {
                     _dateForTimeCount.AddHours(1);
-                    hour--;
+                    Console.WriteLine("Addicionou hora durante a semana entre as 9 e as 20!");
                 }
                 else if (_dayOfWeek[6] == 6 && _todayHour > _openHour && _todayHour < _closeSaturdaysHour)
                 {
                     _dateForTimeCount.AddHours(1);
-                    hour--;
+                    Console.WriteLine("Addicionou hora durante no sabado ente as 9h e 14h!");
                 }
                 else
                 {
-                    _dateForTimeCount.AddHours(13);
+                    _dateForTimeCount.AddHours(11);
+                    Console.WriteLine("chegou numa das horas de fecho e acrescentou 11 horas!");
                 }
+                hour -= 1;
             }
 
             return _dateForTimeCount;

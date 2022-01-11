@@ -463,8 +463,8 @@ namespace Menus
                 total = paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())));
                 Console.WriteLine("total variable " + total);
 
-                newSchedule.CalculateTime(total); //Calculate time
-                Console.WriteLine("{0}date ,{1}d , {2}h, {3}m", _startingDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
+                newSchedule.CalculateTime(Math.Round(total)) ; //Calculate time
+                Console.WriteLine("{0}date ,{1}d , {2}h, {3}m", _loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
 
                 _loopDate = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);//ADD the time calculated to the schedule
                 Console.WriteLine("DATA de actualiza????? " + _loopDate);
