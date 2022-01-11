@@ -109,13 +109,13 @@ namespace Menus
             Console.WriteLine(" ---------------------------------------------");
             Console.WriteLine("| Hello! Please, insert your Admin Pin code.  |"); // \n == Enter, \t == tab, \b == ' '
             Console.WriteLine(" ---------------------------------------------");
+            Console.WriteLine(" >>> If your Pin is correct you will be send to Admin Menu    ");
+            Console.WriteLine(" >>> If you write the wrong Pin, you will be sent back to the main Menu.");
             int pin = int.Parse(Console.ReadLine());
 
                 if (pin == pinCode)
                 {
-                    Console.WriteLine(" ------------------------------");
-                    Console.WriteLine("|     Your Pin is correct!     |");
-                    Console.WriteLine(" ------------------------------");
+                    
                     AdminMenu();
                 }
                 /*else if (pin != pinCode && tries < 3)
@@ -126,9 +126,7 @@ namespace Menus
                 }*/
                 else if (pin != pinCode)
                 {
-                    Console.WriteLine(" -------------------------------------------------------------------");
-                    Console.WriteLine("| !!! Blocked, you will be sent back to the main Menu. Goodbye !!! |");
-                    Console.WriteLine(" -------------------------------------------------------------------");
+                    
                     MainMenu();
                 }
         } 
