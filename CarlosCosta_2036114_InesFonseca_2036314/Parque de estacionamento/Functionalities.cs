@@ -182,7 +182,7 @@ namespace Functionalities
 
     }
 
-    public class MoneyMachine
+    public partial class MoneyMachine
     {
         //Receives the cash from the user input
         //Pre-define Money accepted by the Machine
@@ -196,7 +196,7 @@ namespace Functionalities
         //Creating a varible to receive the cash
         public double _cash;
         public double _addCash { get; set; }
-        public double _machineTotalAmount { get; set; }
+        public static double _machineTotalAmount { get; set; }
         public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 }; 
         //change coins: can´t accept more than 50 cent because- zone1 max. 45 min which is up to 85 cent - zone2 max 1h which is up to 2€
         //define what happens when the client uses other coins, letters or negative numbers
@@ -215,9 +215,9 @@ namespace Functionalities
             }
             else
             {
-                Console.WriteLine("\nYou insert {0} €\n", amount);
-                Console.WriteLine("You money is not accepted by the machine!");
-                Console.WriteLine("The coins accepted are {0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50} cents and {1.00, 2.00, 5.00, 10.00, 20.00} euros. \n");
+                Console.WriteLine("\n>>>You inserted {0} €\n", amount);
+                Console.WriteLine("   !!! You money is not accepted by the machine !!!");
+                Console.WriteLine("   The coins accepted are:\n   {0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50} cents \n   and {1.00, 2.00, 5.00, 10.00, 20.00} euros. \n");
             }
 
             //calculates the addiion of the cash
@@ -270,9 +270,9 @@ namespace Functionalities
         //Zone Payments time rules
 
         //============================== Zone1: 1.15 euros/h => max 45min =================================
-        public double _timePerHourZone1 = 1.15;//Convert price per hour to price per minutes
-        public double _maxMinutesInZone1 = 45;// Time already in minutes
-        public double _timePaidForZone1;//Stores the value Calculated by the function PayInZone1()
+        public double _timePerHourZone1 = ((1.15 * 45) / 60);//Convert price per hour to price per minutes
+        public double _timePerHourZone2 = ((1.00 * 120) / 60);// Time already in minutes
+        public double _timePerHourZone3 = ((0.62 * 60) / 60);//Stores the value Calculated by the function PayInZone1()
         public double PayInZone1(double _addCash) //Calculating the payment for Zone1
         {
             //Verificar o dia da semana, e horario de estacionamento DONE!

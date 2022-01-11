@@ -21,7 +21,7 @@ namespace ConsolePrint
             Console.WriteLine("|-----------------------------------------------------------------------|");
             Console.WriteLine("|___________________________"+(DateTime.Now)+"_________________________|"); //display date and time
             Console.WriteLine("|                                                                       |");
-            Console.WriteLine("|  >Navigate through the Menus by pressing the representative number!<  |"); ///n
+            Console.WriteLine("|  >Navigate through the Menus by pressing the representative number!<  |"); //
             Console.WriteLine("|                                                                       |");
             Console.WriteLine("|                            _Client Menu [1]_                          |");
             Console.WriteLine("|                            _Admin Menu [2]_                           |");
@@ -50,9 +50,12 @@ namespace ConsolePrint
             Console.WriteLine("|                                         | ");
             Console.WriteLine("|__________Back to main menu [4]__________|");
         }
+        
 
+        
         public static void PrintAdminMenu()//Print for the Main Menu
         {
+            
             Console.Clear();
             Console.WriteLine(" _________________________________________");
             Console.WriteLine("|           Admin Menu selected!          |");
@@ -65,7 +68,8 @@ namespace ConsolePrint
             Console.WriteLine("|            _Report zone [1]_            |");
             Console.WriteLine("|            _Report zone [2]_            |");
             Console.WriteLine("|            _Report zone [3]_            |");
-            //Console.WriteLine();//Total Money from the 3 Zones ============FAZER!!!!!!!!!!!!!
+            Console.WriteLine("|                                         | ");
+            Console.WriteLine("  >>>Total money of the day is:{0}         ", MoneyMachine._machineTotalAmount);//Total Money from the 3 Zones ============FAZER!!!!!!!!!!!!!
             Console.WriteLine("|                                         | ");
             Console.WriteLine("|__________Back to main menu [4]__________|");
             Console.WriteLine("|_____________Stand By UI [0]_____________|");

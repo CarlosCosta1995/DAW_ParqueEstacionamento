@@ -24,10 +24,12 @@ namespace Menus
         public static void Start() //Start UI
         {
             Console.Clear();
-            Console.WriteLine("Machine in standby.");
-            Console.WriteLine("_Please press start [0]_");
+            Console.WriteLine(" ----------------------------");
+            Console.WriteLine("|     Machine in standby     |");
+            Console.WriteLine(" ----------------------------"); 
+            Console.WriteLine("|___Please press start [0]___|");
 
-            int userSelection = int.Parse(Console.ReadLine());
+            Console.Write(">"); int userSelection = int.Parse(Console.ReadLine());
 
             switch (userSelection)
             {
@@ -109,26 +111,40 @@ namespace Menus
             Console.WriteLine(" ---------------------------------------------");
             Console.WriteLine("| Hello! Please, insert your Admin Pin code.  |"); // \n == Enter, \t == tab, \b == ' '
             Console.WriteLine(" ---------------------------------------------");
-            Console.WriteLine(" >>> If your Pin is correct you will be send to Admin Menu    ");
-            Console.WriteLine(" >>> If you write the wrong Pin, you will be sent back to the main Menu.");
             int pin = int.Parse(Console.ReadLine());
 
-                if (pin == pinCode)
+            int Pin;
+            int tentativas = 3;
+
+            while (tentativas <= 3)
+            {
+                Console.Write("->"); Pin = int.Parse(Console.ReadLine());
+
+                if (Pin == pinCode)
                 {
-                    
+                    Console.WriteLine(" ------------------------------");
+                    Console.WriteLine("|     Your Pin is correct!     |");
+                    Console.WriteLine(" ------------------------------");
+                    tentativas = 3;
                     AdminMenu();
                 }
-                /*else if (pin != pinCode && tries < 3)
+                else if (Pin != pinCode && tentativas > 0 && tentativas <= 3)
                 {
-                    Console.WriteLine("Your Pin is Incorrect! Please try again.\n");
-                    AdminLogInMenu();
-                    tries++;
-                }*/
-                else if (pin != pinCode)
-                {
-                    
-                    MainMenu();
+                    Console.WriteLine();
+                    Console.WriteLine(" -------------------------------------------------------------------");
+                    Console.WriteLine("| !!!       Your Pin is Incorrect! Please try again.           !!! |");
+                    Console.WriteLine(" -------------------------------------------------------------------");
+                    Console.WriteLine("| !!! Failing 3 times, you will be sent back to the main Menu. !!! |");
+                    Console.WriteLine(" -------------------------------------------------------------------");
+                    tentativas--;
                 }
+                else
+                {
+                    MainMenu();
+                    tentativas = 3;
+                }
+
+            }
         } 
 
         public static void AdminMenu() //Clients Interactive Menu
@@ -181,7 +197,7 @@ namespace Menus
             Console.WriteLine("|                " + DateTime.Now + "                |");
             Console.WriteLine("|                                                   |");
             Console.WriteLine("|------------------Price/max.Hour-------------------|");
-            Console.WriteLine("|                1.15€/h - 0,85 por max.45 min      |");
+            Console.WriteLine("|                1.15€/h  max.45 min                |");
             Console.WriteLine("|                                                   |");
             Console.WriteLine("|________________>Insert your Plate:<_______________|"); //Ask the user for a Car Plate
             string carPlateZone1 =  Console.ReadLine();
@@ -315,7 +331,7 @@ namespace Menus
             Console.WriteLine("|                " + DateTime.Now + "                |");
             Console.WriteLine("|                                                   |");
             Console.WriteLine("|------------------Price/max.Hour-------------------|");
-            Console.WriteLine("|                1€/h - 2 euros max.2 hours         |");
+            Console.WriteLine("|                1€/h  max.2 hours                  |");
             Console.WriteLine("|                                                   |");
             Console.WriteLine("|________________>Insert your Plate:<_______________|"); //Ask the user for a Car Plate
             string carPlateZone2 = Console.ReadLine();
