@@ -415,207 +415,63 @@ namespace Functionalities
         }
         public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute)
         {
-            int _todayDay = _dateForTimeCount.Day;
+            int _todayDay = (int)_dateForTimeCount.DayOfWeek;
             int _todayHour = _dateForTimeCount.Hour;
             int _todayMinute = _dateForTimeCount.Minute;
 
-            //Hour Open and closed
-            int _openHour = 9;
-            int _closeHour = 20;
-            int _closeSaturdaysHour = 14;
-            
-            /*while(day > 0)
+            //Store the result in a TimeSpan
+            TimeSpan tSpan = new TimeSpan(_todayDay, _todayHour, _todayMinute, 0);
+            DateTime resultado = _dateForTimeCount;
+
+            while (day > 0)
             {
-                if (_todayDay != _dayOfWeek[6] || _todayDay != _dayOfWeek[0])
+                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0])
                 {
-                    _dateForTimeCount.AddDays(1);
-                    day--;
+                    _todayDay += 1;
                 }
                 else if(_dayOfWeek[6] == 6) 
                 {
-                    _dateForTimeCount.AddDays(1);
-                    day--;
+                    _todayDay = 0;
                 }
                 else 
                 {
-                    _dateForTimeCount.AddDays(1);
-                    day--;
+                    _todayDay = 1;
                 }
-            }*/
+                day--;
+            }
 
-            while(hour > 0) 
+            while(hour > 0 && hour <= 23) 
             {
-                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0] && _todayHour > _openHour && _todayHour < _closeHour)
+                if (_todayHour >= 9 && _todayHour < 20)
                 {
-                    _dateForTimeCount.AddHours(1);
-                    Console.WriteLine("Addicionou hora durante a semana entre as 9 e as 20!");
+                    _todayHour += 1;
                 }
-                else if (_dayOfWeek[6] == 6 && _todayHour > _openHour && _todayHour < _closeSaturdaysHour)
+                else if (_dayOfWeek[6] == 6 && _todayHour >= 9 && _todayHour < 14)
                 {
-                    _dateForTimeCount.AddHours(1);
-                    Console.WriteLine("Addicionou hora durante no sabado ente as 9h e 14h!");
+                    _todayHour += 1;
                 }
                 else
                 {
-                    _dateForTimeCount.AddHours(11);
-                    Console.WriteLine("chegou numa das horas de fecho e acrescentou 11 horas!");
+                    _todayHour += 12;
                 }
-                hour -= 1;
+                hour--;
             }
 
-            return _dateForTimeCount;
-
-            /*
-            timeConvertMinutes = minute + (hour * 60) + (day * 1440);
-
-            DateTime novo = DateTime.Now;
-            int conta = 0;
-
-            for (int i = 0;  timeConvertMinutes > i; timeConvertMinutes--)
+            while (minute > 0 && minute <= 59) 
             {
-                
-                if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
+                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0] && _todayHour >= 9 && _todayHour < 20)
                 {
-
-                    // _dateForTimeCount.AddMinutes(1);
-                    //timeConvertMinutes--;
-                    conta++;
-                    Console.WriteLine("if ddicionando minutos" + conta );
+                    _todayMinute += 1;
                 }
-                else if (_dateForTimeCount.Hour >= 20) 
+                else if (_dayOfWeek[6] == 6 && _todayHour >= 9 && _todayHour < 14)
                 {
-                    _dateForTimeCount.AddHours(13);
-                    _dateForTimeCount.AddMinutes(1);
-                    conta++;
-                    //timeConvertMinutes--;
-                    Console.WriteLine(" else Adicionando um dia e os minutos" + _dateForTimeCount); 
-                } 
-                else { }
-            } //while (timeConvertMinutes > 0) ; 
-
-
-            _dateForTimeCount.AddMinutes(conta);
-            Console.WriteLine("\n data final==!! " + _dateForTimeCount.AddMinutes(conta));
-            return _dateForTimeCount;*/
-
-
-
-            /*
-            //_dateAtOpen = _dateForTimeCount;
-            //_dateAtClose =_dateForTimeCount.Add(_paidTime);
-        
-            if((int)_dateForTimeCount.DayOfWeek == _dayOfWeek[0] && (_dateForTimeCount.Hour >= 9 || _dateForTimeCount.Hour < 16))
-            {
-                _dateForTimeCount.AddDays(day);
-                _dateForTimeCount.AddHours(hour);
-                _dateForTimeCount.AddMinutes(minute);
-                Console.WriteLine("time add to date " + _dateForTimeCount);
-            }
-            else if ((int)_dateForTimeCount.DayOfWeek == _dayOfWeek[6] && (_dateForTimeCount.Hour >= 9 || _dateForTimeCount.Hour < 14)) 
-            {
-                _dateForTimeCount.AddHours(hour);
-                _dateForTimeCount.AddMinutes(minute);
-                Console.WriteLine("\ntime add to date " + _dateForTimeCount);
-            }
-            else if((int)_dateForTimeCount.DayOfWeek != _dayOfWeek[0])
-            {
-                _dateForTimeCount.AddHours(6 + 9);
-                Console.WriteLine("\nADD tempo par aoutro dia");
-            }*/
-
-
-
-
-            /*
-                        if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour <= 20) 
-                        {
-                            if (_dateForTimeCount.CompareTo(_dateAtClose) <= 0)
-                            {
-                                _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
-                            }
-                            else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
-                            {
-                                _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
-                                _dateForTimeCount = _dateForTimeCount.Subtract(_comparedTime);
-                                Console.WriteLine("You exceed the park open hours!");
-                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
-
-                                _dateForTimeCount = _dateForTimeCount.AddHours(13);
-                                _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                                Console.WriteLine("Now, you must park from {0} to {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
-                            }
-                            /*else if (_dateForTimeCount.CompareTo(_dateAtClose) >= 1)
-                            {
-                                _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                                _comparedTime = _dateAtClose.Subtract(_dateForTimeCount);
-                                _dateForTimeCount = _dateForTimeCount.AddHours(13);
-                                _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                                Console.WriteLine("ADD UM DIA!!!!" + _dateForTimeCount);
-                            }
-                            else 
-                            {
-                                Console.WriteLine("ADD MINUTOS E HORAS!!!!" + _dateForTimeCount);
-                                Console.WriteLine("You can be parked this day until {0}.", _dateForTimeCount);
-                            }
-
-                        }
-                        else if(_dateForTimeCount.Hour < 9 || _dateForTimeCount.Hour > 20) 
-                        {
-                            Console.WriteLine("The park is closed!\n Your time will be add for tomorrow!");
-                            Console.WriteLine("Current time:" + _dateForTimeCount);
-                            _comparedTime = _dateAtOpen.Subtract(_dateForTimeCount);
-                            _dateForTimeCount = _dateForTimeCount.Add(_comparedTime);
-                            _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                            Console.WriteLine("Now, you must park from {0}, until {1} only.", _dateAtOpen.AddDays(1), _dateForTimeCount);
-                        }
-                        else
-                        {
-                            Console.WriteLine("FDSA" + _dateForTimeCount);
-                        }*/
-            /*
-            if ((int)DateTime.Now.DayOfWeek != _dayOfWeek[0] || (int)DateTime.Now.DayOfWeek != _dayOfWeek[6]) //durante a Semana
-            {
-                if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20)
-                {
-                    if (_dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour <= 20)
-                    { 
-                        _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                        Console.WriteLine("AINDA NO DIA!!!!" + _dateForTimeCount);
-                    }
-                    else if (_dateForTimeCount.Hour < 9 || _dateForTimeCount.Hour > 20)
-                    {   
-
-                        _dateForTimeCount = _dateForTimeCount.AddHours(12);
-                        _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                        Console.WriteLine("NO OUTRO DIA!!!!" + _dateForTimeCount);
-                    }
+                    _todayMinute += 1;
                 }
-                
-          
-                else if (DateTime.Now.Hour <= 9 && DateTime.Now.Hour >= 20)
-                {
-                    _dateForTimeCount = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day+1, 9, 0, 0, 0);
-                    _dateForTimeCount = _dateForTimeCount.AddHours(hour).AddMinutes(minute);
-                    Console.WriteLine(_dateForTimeCount);
-                }
+
+                _todayMinute--;
             }
-         
-            else if ((int)DateTime.Now.DayOfWeek == _dayOfWeek[6]) //durante o Sabado
-            { 
-                if(DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20) 
-                { 
-                
-                }
-                else 
-                { 
-                    
-                }
-            }
-            else if ((int)DateTime.Now.DayOfWeek == _dayOfWeek[0]) //durante o Domingo
-            { 
-            
-            }*/
+            resultado = _dateForTimeCount + tSpan;
+            return resultado;
         }
     }
 }

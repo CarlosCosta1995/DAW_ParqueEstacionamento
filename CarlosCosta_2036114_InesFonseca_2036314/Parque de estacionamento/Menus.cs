@@ -458,149 +458,20 @@ namespace Menus
             
             do
             {
-                
+                Console.WriteLine(" _loopDate " + _loopDate);
                 Console.WriteLine("\nInsert your cash:");
-                total = paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())));
+                total = Math.Round(paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()))));
                 Console.WriteLine("total variable " + total);
 
-                newSchedule.CalculateTime(Math.Round(total)) ; //Calculate time
+                newSchedule.CalculateTime(total); //Calculate time
                 Console.WriteLine("{0}date ,{1}d , {2}h, {3}m", _loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
 
-                _loopDate = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);//ADD the time calculated to the schedule
-                Console.WriteLine("DATA de actualiza????? " + _loopDate);
 
-                //Console.WriteLine("Tempo Calculado: {0}dias, {1}hora, {2}min, {3}sec.", newSchedule.Day, newSchedule.Hour, newSchedule.Minute, newSchedule.Second);
-               
-                //======== Calculate time ======
-                /*if (paidpark.PayInZone3(total) < 60)
-                {
-                    minute = PaidTotalTime;
-                }
-                if (paidpark.PayInZone3(total) == 60)
-                {
-                    hour += 1;
+                //TimeSpan tSpan = new System.TimeSpan((int)newSchedule.Day, (int)newSchedule.Hour, (int)newSchedule.Minute, 1);
+                DateTime result = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
 
-                    if(hour > 0 && PaidTotalTime < 60) 
-                    {
-                        
-                        minute = PaidTotalTime - 60;
-                    }
-                    else 
-                    {
-                        hour += 1;
-                        minute = PaidTotalTime - 60;
-                    }
-                }
-                if (paidpark.PayInZone3(total) >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
-                {
-                    days += 1;
-                    PaidTotalTime = PaidTotalTime - 1440;
-                }
-                timeSpan = new TimeSpan(days, hour, minute, second);*/
+                Console.WriteLine("Data final " + result); 
 
-
-                /*while (PaidTotalTime > 0) {
-
-                    if (PaidTotalTime >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
-                    {
-                        days += 1;
-                        PaidTotalTime = PaidTotalTime - 1440;
-                    }
-                    else if (PaidTotalTime >= 60)
-                    {
-                        hour += 1;
-                        PaidTotalTime = PaidTotalTime - 60;
-                    }
-                    if (PaidTotalTime < 60)
-                    {
-                        minute = PaidTotalTime;
-                        break;
-                    }
-
-                }
-                timeSpan = new TimeSpan(days, hour, minute, second);*/
-
-
-                // DateTime nextDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 9, 0, 0);
-
-                /*if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday ) //Week schedule
-                    {
-                        Console.WriteLine(DateTime.Now);
-                        Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                        Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                        Console.WriteLine("Press zero(0) to stop counting.");
-
-                    }
-                    else
-                    {
-                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14) //Saturdays Open Hours
-                        {
-                            Console.WriteLine(DateTime.Now);
-                            Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                            Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                            Console.WriteLine("Press zero(0) to stop counting.");
-
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can Park for Free before 9 and after 20h. You will be refunded!"); //the client can´t be refunded
-                            stop = false;
-                        }
-                    }
-                }
-                else //domingo
-                {
-                    
-                    
-
-                    Console.WriteLine(DateTime.Now);
-                    Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                    Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                    Console.WriteLine("Press zero(0) to stop counting.");
-                }*/
-
-                /*
-                //TimeSpan timesub = new TimeSpan(0, 13, 0, 0);
-                //dataNow = DateTime.Now - DateTime.Now.Subtract(0, 0, DayOfWeek.Monday, DateTime.Now.AddHours(13), 0, 0);
-                //dataNow = ObjectMerger.MergeObjects(dataNow, DateTime.Now.Add(timeSpan));
-                //dataNow = DateTime.Now.Add(timeSpan);
-
-
-                //TimeSpan timeSpan = new TimeSpan(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, Math.Abs(DateTime.Now.Hour - 9), 0, 0)
-                DateTime diaSeguinte = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.AddDays(1), DateTime.Now.Hour + Math.Abs(DateTime.Now.Hour - 13), DateTime.Now.Minute + Math.Abs(DateTime.Now.Minute - 0), 0);
-                DateTime Realtime = DateTime.Now - DateTime.Now.Subtract(diaSeguinte);
-
-                TimeSpan span = (TimeZoneInfo.ConvertTimeToUtc(Realtime) - diaSeguinte); //+ timeSpan;
-                DateTime Nova = DateTime.Now.Add(span);
-               // Nova = Nova.Add(timeSpan);
-
-                //span = TimeZoneInfo.ConvertTimeToUtc(Realtime) - diaSeguinte;
-                //unixTimestamp = span.TotalHours;
-
-                Console.WriteLine("===!!=!=!=!=!=!=!" + Nova);*/
-
-                //Se o dateTime.Now = sabado dps das 14h, ele salta dois dias. Depois adiciona o tempo pago restante
-                //Se o dateTime.Now = domingo a qualquer hora entre as 00h (sabado) e as 24h (domingo)
-                //https://iditect.com/guide/csharp/csharp_howto_convert_datetime.html
-                //https://stackoverflow.com/questions/8702603/merging-two-objects-in-c-sharp
-
-
-
-
-
-                //ALERT DONT DELETE!!!
-                /*  Console.WriteLine(DateTime.Now);
-                  Console.WriteLine("You have now paid for {0} minutes.", Math.Round(paidpark.PayInZone3(total))); //===!!!=!=!=!
-                  Console.WriteLine("You can be parked until: {0}", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));//DateTime.Now.Add(timeSpan));
-                  Console.WriteLine("Press zero(0) to stop counting.");*/
-
-
-
-                /*moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                Console.WriteLine("You can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                Console.WriteLine("Press zero(0) if you want to stop counting.");*/
                 if (moneyMachine._cash == 0) { stop = false; }
             } while (stop == true);
 
