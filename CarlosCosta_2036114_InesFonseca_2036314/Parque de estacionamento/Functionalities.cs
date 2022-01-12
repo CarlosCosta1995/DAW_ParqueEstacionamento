@@ -226,8 +226,8 @@ namespace Functionalities
 
             //calculates the addiion of the cash
             _addCash += _cash;
-            machineTotalMoney(_addCash); //To _addCash to the total money inside the machine by calling the method
-            return _addCash;
+            machineTotalMoney(_cash); //To _addCash to the total money inside the machine by calling the method
+            return _cash;
         }
 
         public double machineTotalMoney(double _addCash) //Calculates the total of cash inside the Machine
@@ -402,7 +402,7 @@ namespace Functionalities
                     _days += 1;
                     _timePaid = _timePaid - 1440;
                 }
-                else if (_timePaid >= 60)
+                /*else if (_timePaid >= 60)
                 {
                     _hour += 1;
                     _timePaid = _timePaid - 60;
@@ -410,28 +410,144 @@ namespace Functionalities
                 else if (_timePaid < 60)
                 {
                     _minute = _timePaid;
-                }
+                }*/
             }
+
+            //double novo = _timePaid / 60;
+
+
+            var time = TimeSpan.FromMinutes(_timePaid);
+            Console.WriteLine("{0:00}:{1:00}", (int)time.TotalHours, time.Minutes);
+
+
+            _hour = (int)time.TotalHours;
+            _minute = time.Minutes;
+
+            //Console.WriteLine("Novo valor " + novo);
+
         }
         public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute)
         {
-            int _todayDay = (int)_dateForTimeCount.DayOfWeek;
-            int _todayHour = _dateForTimeCount.Hour;
-            int _todayMinute = _dateForTimeCount.Minute;
+            int _todayDay = 0;
+            int _todayHour = 0;
+            int _todayMinute = 0;
 
             //Store the result in a TimeSpan
-            TimeSpan tSpan = new TimeSpan(_todayDay, _todayHour, _todayMinute, 0);
+            TimeSpan tSpan;
             DateTime resultado = _dateForTimeCount;
+
+            /*while (day > 0 || (hour > 0 && hour <= 23) || (minute > 0 && minute <= 59))
+            {
+                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0]) //From Monday to Friday
+                {
+                    if(_todayHour >= 9 && _todayHour < 20) //Schedle for the week
+                    {
+                        if (minute > 0 && minute <= 59) 
+                        {
+                            _todayMinute += 1;
+                        }
+                        else 
+                        {
+                            _todayHour += 1;
+                        }
+                    }
+                    else 
+                    {
+                        _todayDay += 1;
+                    }
+                }
+                else if (_dayOfWeek[6] == 6)
+                {
+                    if (_todayHour >= 9 && _todayHour < 14)//Schedule for Saturdays
+                    {
+                        if (minute > 0 && minute <= 59)
+                        {
+                            _todayMinute += 1;
+                        }
+                        else
+                        {
+                            _todayHour += 1;
+                        }
+                    }
+                    else
+                    {
+                        _todayDay += 1;
+                    }
+                }
+                else //Sundays
+                {
+                    if(_todayHour >= 9 && _todayHour < 20)//Between this Hours Skip a day
+                    {
+                        _todayDay = 1;
+                    }
+                    else 
+                    {
+                        _todayHour += 11;
+                    }
+                }
+                day--;
+                hour--;
+                minute--;
+            }
+
+            resultado = _dateForTimeCount + tSpan;
+            return resultado;*/
+
+            while (minute > 0)
+            {
+                if (minute > 59)
+                {
+                    _todayHour += 1;
+                    minute -= 59;
+                }
+                else
+                {
+                    if ((int)_dateForTimeCount.DayOfWeek != 0 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
+                    {
+                        _todayMinute += 1;
+                    }
+                    else if ((int)_dateForTimeCount.DayOfWeek == 6 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 14)
+                    {
+                        _todayMinute += 1;
+                    }
+                }
+                minute--;
+            }
+
+            while (hour > 0)
+            {
+                if (hour > 23)
+                {
+                    _todayDay += 1;
+                    hour -= 23;
+                }
+                else
+                {
+                    if ((int)_dateForTimeCount.DayOfWeek != 0 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
+                    {
+                        _todayHour += 1;
+                    }
+                    else if ((int)_dateForTimeCount.DayOfWeek == 6 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 14)
+                    {
+                        _todayHour += 1;
+                    }
+                    else
+                    {
+                        _todayHour += 11;
+                    }
+                }
+                hour--;
+            }
 
             while (day > 0)
             {
-                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0])
+                if ((int)_dateForTimeCount.DayOfWeek != 6 && (int)_dateForTimeCount.DayOfWeek != 0)
                 {
                     _todayDay += 1;
                 }
-                else if(_dayOfWeek[6] == 6) 
+                else if((int)_dateForTimeCount.DayOfWeek == 6) 
                 {
-                    _todayDay = 0;
+                    _todayDay += 1;
                 }
                 else 
                 {
@@ -440,38 +556,34 @@ namespace Functionalities
                 day--;
             }
 
-            while(hour > 0 && hour <= 23) 
-            {
-                if (_todayHour >= 9 && _todayHour < 20)
-                {
-                    _todayHour += 1;
-                }
-                else if (_dayOfWeek[6] == 6 && _todayHour >= 9 && _todayHour < 14)
-                {
-                    _todayHour += 1;
-                }
-                else
-                {
-                    _todayHour += 12;
-                }
-                hour--;
-            }
-
-            while (minute > 0 && minute <= 59) 
-            {
-                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0] && _todayHour >= 9 && _todayHour < 20)
-                {
-                    _todayMinute += 1;
-                }
-                else if (_dayOfWeek[6] == 6 && _todayHour >= 9 && _todayHour < 14)
-                {
-                    _todayMinute += 1;
-                }
-
-                _todayMinute--;
-            }
+            tSpan = new TimeSpan(_todayDay, _todayHour, _todayMinute, 0);
             resultado = _dateForTimeCount + tSpan;
+            
             return resultado;
         }
+
+        public void CompareDate(DateTime data)
+        {
+            //Comparar a data do resultado e imprimir as duas datas
+            //tempo pago desde dia e tempo pago no proximo dia
+
+            DateTime _openTimeWeek = new DateTime(data.Year, data.Month, data.Day, 9, 0, 0);
+            DateTime _closeTimeWeek = new DateTime(data.Year, data.Month, data.Day, 20, 0, 0);
+            DateTime _closeTimeSaturday = new DateTime(data.Year, data.Month, data.Day, 14, 0, 0);
+            TimeSpan _CompareDates = new TimeSpan();
+            
+            if ((int)data.DayOfWeek != 0 && (int)data.DayOfWeek != 6) 
+            {
+                if (data.Hour >= 20)
+                {
+                    _CompareDates = _closeTimeWeek.Subtract(data);
+                    _openTimeWeek.AddDays(1);
+                    _openTimeWeek.Add(_CompareDates);
+                }
+            }
+            else if ((int)data.DayOfWeek != 6 && data.Hour >= 14)
+            
+        }
     }
+
 }

@@ -12,15 +12,6 @@ namespace Menus
     public class AllMenus
     {
         //https://www.youtube.com/watch?v=9JST13MhrFU
-
-        TimeSpan ticket_;
-
-        public static long ConvertDatetimeToUnixTimeStamp(DateTime date)
-        {
-            DateTime originDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan diff = date.ToUniversalTime() - originDate;
-            return (long)Math.Floor(diff.TotalSeconds);
-        }
         public static void Start() //Start UI
         {
             Console.Clear();
@@ -455,22 +446,24 @@ namespace Menus
             DateTime _startingDate = DateTime.Now;
             DateTime _loopDate = new DateTime();
             _loopDate = _startingDate;
+            DateTime result = new DateTime();
             
             do
             {
-                Console.WriteLine(" _loopDate " + _loopDate);
+                //Console.WriteLine("data inicial = _loopDate " + _loopDate);
                 Console.WriteLine("\nInsert your cash:");
-                total = Math.Round(paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()))));
-                Console.WriteLine("total variable " + total);
+                total = paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())));
+                //Console.WriteLine("total variable " + total);
 
-                newSchedule.CalculateTime(total); //Calculate time
-                Console.WriteLine("{0}date ,{1}d , {2}h, {3}m", _loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
-
+                newSchedule.CalculateTime(Math.Round(total)); //Calculate time
+                Console.WriteLine("\n Tempos Calculados {0}d, {1}h, {2}m", newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
 
                 //TimeSpan tSpan = new System.TimeSpan((int)newSchedule.Day, (int)newSchedule.Hour, (int)newSchedule.Minute, 1);
-                DateTime result = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
+                result = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
 
-                Console.WriteLine("Data final " + result); 
+                newSchedule.CompareDate(result);
+
+                Console.WriteLine("\nData saida " + result + " Data entrada " + _loopDate); 
 
                 if (moneyMachine._cash == 0) { stop = false; }
             } while (stop == true);

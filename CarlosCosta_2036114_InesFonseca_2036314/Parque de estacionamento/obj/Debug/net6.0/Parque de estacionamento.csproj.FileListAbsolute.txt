@@ -34,7 +34,6 @@ C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\bin\Debug\net6.0\Parque de estacionamento.dll
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\bin\Debug\net6.0\ref\Parque de estacionamento.dll
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\bin\Debug\net6.0\Parque de estacionamento.pdb
-C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\obj\Debug\net6.0\Parque de estacionamento.csproj.AssemblyReference.cache
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\obj\Debug\net6.0\Parque de estacionamento.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\obj\Debug\net6.0\Parque de estacionamento.AssemblyInfoInputs.cache
 C:\Users\Net15\Desktop\Requalificar\DAW_ParqueEstacionamento\CarlosCosta_2036114_InesFonseca_2036314\Parque de estacionamento\obj\Debug\net6.0\Parque de estacionamento.AssemblyInfo.cs
