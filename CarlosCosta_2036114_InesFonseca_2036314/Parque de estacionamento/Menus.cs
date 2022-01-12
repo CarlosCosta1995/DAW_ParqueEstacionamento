@@ -314,7 +314,7 @@ namespace Menus
             {
                 Console.WriteLine("\nInsert your cash:");
                 total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-
+             
 
                 if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
                 {
@@ -431,17 +431,12 @@ namespace Menus
             ParkPayment paidpark = new ParkPayment();
             Schedule newSchedule = new Schedule();
 
+            double insertMoney;
 
             //TimeSpan to change date based on paid hours
             //https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=net-6.0
             //https://docs.microsoft.com/en-us/dotnet/api/system.timespan.days?view=net-6.0
             //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.subtract?view=net-6.0
-
-            /* int days = 0;
-             int hour = 0;
-             
-             int second = 0;
-            TimeSpan timeSpan;*/
 
             DateTime _startingDate = DateTime.Now;
             DateTime _loopDate = new DateTime();
@@ -452,7 +447,8 @@ namespace Menus
             {
                 //Console.WriteLine("data inicial = _loopDate " + _loopDate);
                 Console.WriteLine("\nInsert your cash:");
-                total = paidpark.PayInZone3(moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine())));
+                insertMoney = Convert.ToDouble(Console.ReadLine());
+                total = paidpark.PayInZone3(moneyMachine.insertingCash(insertMoney));
                 //Console.WriteLine("total variable " + total);
 
                 newSchedule.CalculateTime(Math.Round(total)); //Calculate time
@@ -465,7 +461,7 @@ namespace Menus
 
                 Console.WriteLine("\nData saida " + result + " Data entrada " + _loopDate); 
 
-                if (moneyMachine._cash == 0) { stop = false; }
+                if (insertMoney == 0) { stop = false; }
             } while (stop == true);
 
             //For Print ticket

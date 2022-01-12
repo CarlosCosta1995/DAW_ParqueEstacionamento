@@ -436,63 +436,6 @@ namespace Functionalities
             TimeSpan tSpan;
             DateTime resultado = _dateForTimeCount;
 
-            /*while (day > 0 || (hour > 0 && hour <= 23) || (minute > 0 && minute <= 59))
-            {
-                if (_todayDay != _dayOfWeek[6] && _todayDay != _dayOfWeek[0]) //From Monday to Friday
-                {
-                    if(_todayHour >= 9 && _todayHour < 20) //Schedle for the week
-                    {
-                        if (minute > 0 && minute <= 59) 
-                        {
-                            _todayMinute += 1;
-                        }
-                        else 
-                        {
-                            _todayHour += 1;
-                        }
-                    }
-                    else 
-                    {
-                        _todayDay += 1;
-                    }
-                }
-                else if (_dayOfWeek[6] == 6)
-                {
-                    if (_todayHour >= 9 && _todayHour < 14)//Schedule for Saturdays
-                    {
-                        if (minute > 0 && minute <= 59)
-                        {
-                            _todayMinute += 1;
-                        }
-                        else
-                        {
-                            _todayHour += 1;
-                        }
-                    }
-                    else
-                    {
-                        _todayDay += 1;
-                    }
-                }
-                else //Sundays
-                {
-                    if(_todayHour >= 9 && _todayHour < 20)//Between this Hours Skip a day
-                    {
-                        _todayDay = 1;
-                    }
-                    else 
-                    {
-                        _todayHour += 11;
-                    }
-                }
-                day--;
-                hour--;
-                minute--;
-            }
-
-            resultado = _dateForTimeCount + tSpan;
-            return resultado;*/
-
             while (minute > 0)
             {
                 if (minute > 59)
@@ -567,6 +510,7 @@ namespace Functionalities
             //Comparar a data do resultado e imprimir as duas datas
             //tempo pago desde dia e tempo pago no proximo dia
 
+            DateTime _dateTimePaid = data;
             DateTime _openTimeWeek = new DateTime(data.Year, data.Month, data.Day, 9, 0, 0);
             DateTime _closeTimeWeek = new DateTime(data.Year, data.Month, data.Day, 20, 0, 0);
             DateTime _closeTimeSaturday = new DateTime(data.Year, data.Month, data.Day, 14, 0, 0);
@@ -579,10 +523,40 @@ namespace Functionalities
                     _CompareDates = _closeTimeWeek.Subtract(data);
                     _openTimeWeek.AddDays(1);
                     _openTimeWeek.Add(_CompareDates);
+                    _openTimeWeek.Add(_CompareDates);
+                    data.Subtract(_CompareDates);
+
+                    Console.WriteLine("You can be park until {0} until from 9am to {1}", data, _openTimeWeek);
                 }
             }
-            else if ((int)data.DayOfWeek != 6 && data.Hour >= 14)
-            
+            else if ((int)data.DayOfWeek != 6 && data.Hour >= 14) 
+            {
+                _CompareDates = _closeTimeWeek.Subtract(data);
+                _openTimeWeek.AddDays(1);
+                _openTimeWeek.Add(_CompareDates);
+                data.Subtract(_CompareDates);
+
+                Console.WriteLine("You can be park until {0} until from 9am to {1}", data, _openTimeWeek);
+            }
+
+            /*// Compare dates
+            if (dateTimeNow != date)
+            {
+                Console.WriteLine("diferent date");
+            }
+
+            // compare hour, minutes and seconds
+            if (dateTimeNow.Hour != date.Hour)
+            {
+                Console.WriteLine("diferent hour");
+            }
+
+            // if excedd the park schdule yours
+            if (date.Hour >= 20)
+            {
+                // ...
+            }*/
+
         }
     }
 
