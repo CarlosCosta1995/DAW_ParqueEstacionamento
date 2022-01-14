@@ -222,7 +222,7 @@ namespace Functionalities
 
             //calculates the addiion of the cash
             _addCash += _cash;
-            machineTotalMoney(_addCash); //To _addCash to the total money inside the machine by calling the method
+            machineTotalMoney(_cash); //To _addCash to the total money inside the machine by calling the method
             return _addCash;
         }
 
@@ -271,8 +271,8 @@ namespace Functionalities
 
         //============================== Zone1: 1.15 euros/h => max 45min =================================
         public double _timePerHourZone1 = ((1.15 * 45) / 60);//Convert price per hour to price per minutes
-        public double _timePerHourZone2 = ((1.00 * 120) / 60);// Time already in minutes
-        public double _timePerHourZone3 = ((0.62 * 60) / 60);//Stores the value Calculated by the function PayInZone1()
+        public double _maxMinutesInZone1 = 45;// Time already in minutes
+        public double _timePaidForZone1;//Stores the value Calculated by the function PayInZone1()
         public double PayInZone1(double _addCash) //Calculating the payment for Zone1
         {
             //Verificar o dia da semana, e horario de estacionamento DONE!
@@ -290,7 +290,7 @@ namespace Functionalities
 
 
         //============================== Zone2: 1.00 euros/h => max 2h =================================
-        public double _timePerHourZone2 = 1.00;//Convert price per hour to price per minutes
+        public double _timePerHourZone2 = ((1.00 * 120) / 60);//Convert price per hour to price per minutes
         public double _maxMinutesInZone2 = 120;//Convert time in minutes (120 min = 2h * 60min)
         public double _timePaidForZone2; //Stores the value Calculated by the function PayInZone2()
         public double PayInZone2(double _addCash) //Calculating the payment for Zone2
@@ -302,7 +302,7 @@ namespace Functionalities
 
 
         //============================== Zone3: 0.62 euros/h => unlimited time =================================
-        public double _timePerHourZone3 = 0.62;//Convert price per hour to price per minutes
+        public double _timePerHourZone3 = ((0.62 * 60) / 60);//Convert price per hour to price per minutes
         public double _maxMinutesInZone3 = 60;//Convert time in minutes (60 min = 1h)
         public double _timePaidForZone3; //Stores the value Calculated by the function PayInZone3()
 

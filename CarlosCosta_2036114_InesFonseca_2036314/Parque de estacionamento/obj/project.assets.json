@@ -8,24 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\INES\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\INES\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
       "projectName": "Parque de estacionamento",
-      "projectPath": "C:\\Users\\INES\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
-      "packagesPath": "C:\\Users\\INES\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\INES\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\obj\\",
+      "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\Parque de estacionamento.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\DAW_ParqueEstacionamento\\CarlosCosta_2036114_InesFonseca_2036314\\Parque de estacionamento\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\INES\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

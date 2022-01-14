@@ -13,7 +13,9 @@ namespace ConsolePrint
     {
         //All the console write will be grouped in this Print class
 
-        public static void PrintMainMenu()//Print for the Main Menu
+        //========================= Print for the Main Menu ========================//
+
+        public static void PrintMainMenu()
         {
             Console.Clear();
             Console.WriteLine(" -----------------------------------------------------------------------");
@@ -21,7 +23,7 @@ namespace ConsolePrint
             Console.WriteLine("|-----------------------------------------------------------------------|");
             Console.WriteLine("|___________________________"+(DateTime.Now)+"_________________________|"); //display date and time
             Console.WriteLine("|                                                                       |");
-            Console.WriteLine("|  >Navigate through the Menus by pressing the representative number!<  |"); //
+            Console.WriteLine("|  >Navigate through the Menus by pressing the representative number!<  |"); 
             Console.WriteLine("|                                                                       |");
             Console.WriteLine("|                            _Client Menu [1]_                          |");
             Console.WriteLine("|                            _Admin Menu [2]_                           |");
@@ -29,7 +31,8 @@ namespace ConsolePrint
             Console.WriteLine("|_____________________________Close Menu [0]____________________________|");
         }
 
-        public static void PrintClientMenu()//Print for the Main Menu
+        //========================= Print for the Client Menu ========================//
+        public static void PrintClientMenu()
         {
             Console.Clear();
             Console.WriteLine(" _________________________________________");
@@ -50,10 +53,59 @@ namespace ConsolePrint
             Console.WriteLine("|                                         | ");
             Console.WriteLine("|__________Back to main menu [4]__________|");
         }
-        
+        //========================= Print for the Zone1 Menu ========================//
+        public static void PrintZone1()
+        {
+            Console.Clear();
+            Console.WriteLine(" ___________________________________________________");
+            Console.WriteLine("|                  Zone 1 selected                  |");
+            Console.WriteLine("|                " + DateTime.Now + "                |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|------------------Price/max.Hour-------------------|");
+            Console.WriteLine("|                1.15€/h  max.45 min                |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|________________>Insert your Plate:<_______________|");
+        }
 
-        
-        public static void PrintAdminMenu()//Print for the Main Menu
+        //========================= Print for the Zone2 Menu ========================//
+        public static void PrintZone2()
+        {
+            Console.Clear();
+            Console.WriteLine(" ___________________________________________________");
+            Console.WriteLine("|                  Zone 2 selected                  |");
+            Console.WriteLine("|                " + DateTime.Now + "                |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|------------------Price/max.Hour-------------------|");
+            Console.WriteLine("|                1€/h  max.2 hours                  |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|________________>Insert your Plate:<_______________|");
+        }
+
+        //========================= Print for the Zone3 Menu ========================//
+        public static void PrintZone3()
+        {
+            Console.Clear();
+            Console.WriteLine(" ___________________________________________________");
+            Console.WriteLine("|                  Zone 3 selected                  |");
+            Console.WriteLine("|                " + DateTime.Now + "                |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|------------------Price/max.Hour-------------------|");
+            Console.WriteLine("|               0.62€/h - no max.hours              |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|________________>Insert your Plate:<_______________|");
+        }
+
+        //========================= Print Ticket commum in all Zones ========================//
+        public static void PrintTicket()
+        {
+            Console.WriteLine("\n___________________________________________________ ");
+            Console.WriteLine("|         Do you want to print your ticket?         |");
+            Console.WriteLine("|__________________yes(y) or no(n)__________________|");
+        }
+
+
+        //========================= Print for the Admin Main Menu ========================//
+        public static void PrintAdminMenu()
         {
             
             Console.Clear();
@@ -75,8 +127,8 @@ namespace ConsolePrint
             Console.WriteLine("|_____________Stand By UI [0]_____________|");
         }
 
-        //Print report Zones for Admin
-        public static void ReportZone1() //Zone1 
+        //========================= Print for the Admin Report Zone1 Menu ========================//
+        public static void ReportZone1() 
         {
             Console.WriteLine(" _________________________________________");
             Console.WriteLine("|       >Report of the day: Zone1<        |");
@@ -88,10 +140,14 @@ namespace ConsolePrint
             Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona1.Count());//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
-            
+            Console.WriteLine("|________Back to Admin menu [0]___________|");
+            Console.WriteLine("|________Back to Main menu [1]____________|");
+            Console.WriteLine("|________Back to standby menu [2]_________|");
+
         }
 
-        public static void ReportZone2() //Zone2
+        //========================= Print for the Admin Report Zone2 Menu ========================//
+        public static void ReportZone2() 
         {
             Console.WriteLine(" _________________________________________");
             Console.WriteLine("|       >Report of the day: Zone2<        |");
@@ -103,9 +159,13 @@ namespace ConsolePrint
             Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona2.Count());//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
+            Console.WriteLine("|________Back to Admin menu [0]___________|");
+            Console.WriteLine("|________Back to Main menu [1]____________|");
+            Console.WriteLine("|________Back to standby menu [2]_________|");
         }
 
-        public static void ReportZone3() //Zone3
+        //========================= Print for the Admin Report Zone3 Menu ========================//
+        public static void ReportZone3() 
         {
             Console.WriteLine(" _________________________________________");
             Console.WriteLine("|       >Report of the day: Zone3<        |");
@@ -117,6 +177,9 @@ namespace ConsolePrint
             Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona3.Count());//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
+            Console.WriteLine("|________Back to Admin menu [0]___________|");
+            Console.WriteLine("|________Back to Main menu [1]____________|");
+            Console.WriteLine("|________Back to standby menu [2]_________|");
         }
     }
 }
