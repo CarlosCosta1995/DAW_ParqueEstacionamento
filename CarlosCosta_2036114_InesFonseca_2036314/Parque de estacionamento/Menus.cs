@@ -12,16 +12,8 @@ namespace Menus
     public class AllMenus
     {
         //https://www.youtube.com/watch?v=9JST13MhrFU
-
-        TimeSpan ticket_;
-
-        public static long ConvertDatetimeToUnixTimeStamp(DateTime date)
-        {
-            DateTime originDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            TimeSpan diff = date.ToUniversalTime() - originDate;
-            return (long)Math.Floor(diff.TotalSeconds);
-        }
-        public static void Start() //Start UI
+        //========================= Start UI =========================//
+        public static void Start() 
         {
             Console.Clear();
             Console.WriteLine(" ----------------------------");
@@ -29,7 +21,7 @@ namespace Menus
             Console.WriteLine(" ----------------------------"); 
             Console.WriteLine("|___Please press start [0]___|");
 
-            Console.Write(">"); int userSelection = int.Parse(Console.ReadLine());
+            Console.Write("->"); int userSelection = int.Parse(Console.ReadLine());
 
             switch (userSelection)
             {
@@ -42,39 +34,44 @@ namespace Menus
             }
         }
 
-        public static void MainMenu() //Main Menu
+        //========================= Main Menu =========================//
+        //Ref: https://stackoverflow.com/questions/43484523/switch-statements-for-a-menu-c
+        public static void MainMenu() 
         {
-                ConsolePrints.PrintMainMenu(); //Call prints of Main Menu
+            //Call prints of Main Menu
+            ConsolePrints.PrintMainMenu();
 
-                int userSelection = int.Parse(Console.ReadLine()); //user input to navigate through the Main Menu
+            //user input to navigate through the Main Menu
+            Console.Write("->"); int userSelection = int.Parse(Console.ReadLine()); 
+            switch (userSelection) 
+            {
+                case 0:
+                    //Closing Application
+                    CloseApp(); 
+                    break;
+                case 1:
+                    //Call client Menu
+                    ClientMenu();
+                    break;
+                case 2:
+                    //Call Login Admin Menu
+                    AdminLogInMenu();
+                    break;
+                default:
+                    //Unnexpected action from the user
+                    Switchdefault();
+                    break;
+            }
+        }
 
-                switch (userSelection) //Ref: https://stackoverflow.com/questions/43484523/switch-statements-for-a-menu-c
-                {
-                    case 0:
-                        //Closing Application
-                        CloseApp(); 
-                        break;
-                    case 1:
-                        //Call client Menu
-                        ClientMenu();
-                        break;
-                    case 2:
-                        //Call Admin Menu
-                        //AdminMenu();
-                        AdminLogInMenu();
-                        break;
-                    default:
-                        //Unnexpected action from the user. What should it happen in this case?
-                        Switchdefault();
-                        break;
-                }
-        } 
-
-        public static void ClientMenu() //Clients Interactive Menu 
+        //========================= Clients Interactive Menu  =========================//
+        public static void ClientMenu()  
         {
-            ConsolePrints.PrintClientMenu(); //Call prints of Client Menu
+            //Call prints of Client Menu
+            ConsolePrints.PrintClientMenu();
 
-            int userSelection = int.Parse(Console.ReadLine());
+            //user input to navigate through the client Menu
+            Console.Write("->"); int userSelection = int.Parse(Console.ReadLine());
 
             switch (userSelection)
             {
@@ -94,41 +91,37 @@ namespace Menus
                     MainMenu();
                     break;
                 case 5:
-                    CloseApp(); //Closing Application
+                    //Closing Application
+                    CloseApp(); 
                     break;
                 default:
-                    //Unnexpected action from the user. What should it happen in this case?
+                    //Unnexpected action from the user
                     Switchdefault();
                     break;
             }
-        } 
+        }
 
-        public static void AdminLogInMenu() //Security menu for the Admins
+        //========================= Admin Login Menu  =========================//
+        //Security menu for the Admin menu PIN
+        public static void AdminLogInMenu() 
         {
             Console.Clear();
-
+            //PIN
             int pinCode = 0987;
             Console.WriteLine(" ---------------------------------------------");
-            Console.WriteLine("| Hello! Please, insert your Admin Pin code.  |"); // \n == Enter, \t == tab, \b == ' '
+            Console.WriteLine("| Hello! Please, insert your Admin Pin code.  |"); 
             Console.WriteLine(" ---------------------------------------------");
-            int pin = int.Parse(Console.ReadLine());
 
             int Pin;
-            int tentativas = 3;
+            int Tries = 3;
 
-            while (tentativas <= 3)
+            while (Tries <= 3)
             {
+                //User input for Pin
                 Console.Write("->"); Pin = int.Parse(Console.ReadLine());
 
-                if (Pin == pinCode)
-                {
-                    Console.WriteLine(" ------------------------------");
-                    Console.WriteLine("|     Your Pin is correct!     |");
-                    Console.WriteLine(" ------------------------------");
-                    tentativas = 3;
-                    AdminMenu();
-                }
-                else if (Pin != pinCode && tentativas > 0 && tentativas <= 3)
+                if (Pin == pinCode) { Tries = 3; AdminMenu(); }
+                else if (Pin != pinCode && Tries > 0 && Tries <= 3)
                 {
                     Console.WriteLine();
                     Console.WriteLine(" -------------------------------------------------------------------");
@@ -136,22 +129,20 @@ namespace Menus
                     Console.WriteLine(" -------------------------------------------------------------------");
                     Console.WriteLine("| !!! Failing 3 times, you will be sent back to the main Menu. !!! |");
                     Console.WriteLine(" -------------------------------------------------------------------");
-                    tentativas--;
+                    Tries--;
                 }
-                else
-                {
-                    MainMenu();
-                    tentativas = 3;
-                }
-
+                else { MainMenu(); Tries = 3; }
             }
-        } 
+        }
 
-        public static void AdminMenu() //Clients Interactive Menu
+        //========================= Admin Interactive Menu  =========================//
+        public static void AdminMenu() 
         {
-            ConsolePrints.PrintAdminMenu();//Call prints of Admin Menu
+            //Call prints of Admin Menu
+            ConsolePrints.PrintAdminMenu();
 
-            int userSelection = int.Parse(Console.ReadLine()); 
+            //user input to navigate through the Admin Menu
+            Console.Write("->"); int userSelection = int.Parse(Console.ReadLine()); 
 
             switch (userSelection)
             {
@@ -159,78 +150,124 @@ namespace Menus
                     Start();
                     break;
                 case 1:
+                    //Call the Admin Report Menu in Zone1
                     ZoneAdmin1();
                     break;
                 case 2:
+                    //Call the Admin Report Menu in Zone2
                     ZoneAdmin2();
                     break;
                 case 3:
+                    //Call the Admin Report Menu in Zone3
                     ZoneAdmin3();
                     break;
                 case 4:
                     MainMenu();
                     break;
                 default:
-                    //Unnexpected action from the user. What should it happen in this case?
+                    //Unnexpected action from the user
                     Switchdefault();
                     break;
             }
         }
-        
-        public static void CloseApp() //Close the application nor console
-        {
 
-            Environment.Exit(0); //Command to Close App
+        //========================= Close the application nor console =========================//
+        //Command to Close App
+        public static void CloseApp() 
+        {
+            Environment.Exit(0); 
         }
 
-        public static void Switchdefault()//If none of the avaible options is selected 
+        //========================= Default choice =========================//
+        //If none of the avaible options is selected
+        public static void Switchdefault() 
         {
            Console.WriteLine("_!!! Please, choose only the numbers available in the script !!!_");
         }
 
-        //============================================= Zones for Client =============================================//
-        public static void Zone1() //Zone1 Interactive Menu
+        //========================= Client Zone1 ========================//
+        //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
+        public static void Zone1() 
         {
-            Console.Clear();
-            Console.WriteLine(" ___________________________________________________");
-            Console.WriteLine("|                  Zone 1 selected                  |");
-            Console.WriteLine("|                " + DateTime.Now + "                |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|------------------Price/max.Hour-------------------|");
-            Console.WriteLine("|                1.15€/h  max.45 min                |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|________________>Insert your Plate:<_______________|"); //Ask the user for a Car Plate
-            string carPlateZone1 =  Console.ReadLine();
+            //Call prints for Zone1 Menu
+            ConsolePrints.PrintZone1();
 
+            //Ask the user for a Car Plate
+            Console.Write("->"); string carPlateZone1 =  Console.ReadLine();
+            CarPlate.listaZona1.Add(carPlateZone1); 
 
-            CarPlate.listaZona1.Add(carPlateZone1); //ALTERAR!!
-            
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
+            double insertMoneyZone1;
             MoneyMachine moneyMachine = new MoneyMachine();
 
-            //Cheak the time
-            double total; //Variable to accept the same amount of cash inserted in the MoneyMachine method
+            //Check the time
+            //Variable to accept the same amount of cash inserted in the MoneyMachine method
+            double total; 
             ParkPayment paidpark = new ParkPayment();
 
+            //Creating a time span to be added
+            Schedule timeZone1 = new Schedule();
+            TimeSpan tSpanZone1 = new TimeSpan();
 
+            //Days of the week and schedule rules
             do
             {
+                //The client insert the cash and the time is calculated
                 Console.WriteLine("|________________>Insert your cash:<________________|");
-                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                Console.Write("->"); insertMoneyZone1 = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                /*if(insertMoneyZone1 == 0) { stop = false; }//If the user input is Zero(0) coins it stops counting
+                else 
+                {
+                    total = paidpark.PayInZone1(insertMoneyZone1);
+                    timeZone1.CalculateTime(total);
+                    tSpanZone1 = new TimeSpan(Convert.ToInt32(timeZone1.Day), Convert.ToInt32(timeZone1.Hour), Convert.ToInt32(timeZone1.Minute), Convert.ToInt32(timeZone1.Second));
+                    //If it's a day of the week, bettween 9 am and 8 pm and if the time counted is less than 45 min         
+                    if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 20 && tSpanZone1.Minutes <= 45)
+                    {
+                        Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone1.Minutes);
+                        Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone1));
+                        Console.WriteLine("|                                                   |");
+                        Console.WriteLine("|__________Press zero(0) to stop counting___________|");
+                    }
+                    //If it's a saturday, bettween 9 am and 2 pm and if the time counted is less than 45 min  
+                    else if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday && DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 14 && tSpanZone1.Minutes <= 45)
+                    {
+                        Console.WriteLine(DateTime.Now);
+                        Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone1.Minutes);
+                        Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone1));
+                        Console.WriteLine("|                                                   |");
+                        Console.WriteLine("|__________Press zero(0) to stop counting___________|");
+                    }
+                    //If it's a sunday
+                    else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        Console.WriteLine(" >You can Park for Free on Sundays.<\n>You will be refunded if you don´t print the ticket!< ");
+                        stop = false;
+                    }
+                    //If exceeds the time allowed for the zone 
+                    else
+                    {
+                        Console.WriteLine(" !!!You can only be parked for 45 min máx! Don´t print the ticket to receive a refund!!!\n");
+                        //stop = false;
+                    }
+                }*/
 
-                //FALTA!!!!!!!!
-                //definir os dias em que pode usar o park, DateTime... , colocar de 7 em 7 dias seria é domingo. 
-                //Console.WriteLine("====!!===== " + total);
+                //Console.WriteLine("|________________>Insert your cash:<________________|");
+                total = paidpark.PayInZone1(insertMoneyZone1);
+                timeZone1.CalculateTime(total);
+                tSpanZone1 = new TimeSpan(Convert.ToInt32(timeZone1.Day), Convert.ToInt32(timeZone1.Hour), Convert.ToInt32(timeZone1.Minute), Convert.ToInt32(timeZone1.Second));
+
+                //If it's a day of the week, bettween 9 am and 8 pm and if the time counted is less than 45 min
                 if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
                 {
                     if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20)
                     {
-                        if (paidpark.PayInZone1(total) <= 45)
+                        if (tSpanZone1.Minutes > 0 && tSpanZone1.Minutes <= 45)
                         {
-                            
-                            Console.WriteLine(">>>You have now paid for {0} minutes.\n", Math.Round(paidpark.PayInZone1(total)));  
-                            Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone1(total))));
+
+                            Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone1.Minutes);
+                            Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone1));
                             Console.WriteLine("|                                                   |");
                             Console.WriteLine("|__________Press zero(0) to stop counting___________|");
                         }
@@ -242,23 +279,24 @@ namespace Menus
                     }
                     else
                     {
-                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14) 
+                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14)
                         {
-                            if (paidpark.PayInZone1(total) <= 45)
+                            if (tSpanZone1.Minutes >0 && tSpanZone1.Minutes <= 45)
                             {
                                 Console.WriteLine(DateTime.Now);
-                                Console.WriteLine(">>>You have now paid for {0} minutes.\n", Math.Round(paidpark.PayInZone1(total)));
-                                Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone1(total))));
+                                Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone1.Minutes);
+                                Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone1));
                                 Console.WriteLine("|                                                   |");
                                 Console.WriteLine("|__________Press zero(0) to stop counting___________|");
                             }
                             else
                             {
                                 Console.WriteLine(" !!!You can only be parked for 45 min máx! Don´t print the ticket to receive a refund!!!\n");
+                                moneyMachine.refundCash();
                                 stop = false;
                             }
                         }
-                        else 
+                        else
                         {
                             Console.WriteLine(" >You can Park for Free before 9 and after 20h.\nYou will be refunded if you don´t print the ticket!< ");
                             stop = false;
@@ -270,14 +308,13 @@ namespace Menus
                     Console.WriteLine(" >You can Park for Free on Sundays.<\n>You will be refunded if you don´t print the ticket!< ");
                     stop = false;
                 }
-                //Console.WriteLine("You can be parked for {0} time.",Math.Round(paidpark.PayInZone1(total))); //Returns the aproximated time for the amount of inserted coins
-                if (moneyMachine._cash == 0) { stop = false;}
             } while (stop == true);
 
-            //=============== When the user wants to Print a ticket =============== 
-            Console.WriteLine("\n ___________________________________________________ ");
-            Console.WriteLine("|         Do you want to print your ticket?         |\n|__________________yes(y) or no(n)__________________|\n");
-            string ticket = Console.ReadLine(); //user input to navigate through the Menu
+            //=============== Asking the user if he wants to Print a ticket ===============// 
+            ConsolePrints.PrintTicket();
+
+            //======= User input to navigate through integreated Ticket Menu ========//
+            Console.Write("->"); string ticket = Console.ReadLine(); 
             if (ticket == "y")
             {
                 Console.Clear();
@@ -285,133 +322,109 @@ namespace Menus
                 Console.WriteLine("|                      TICKET                       |");
                 Console.WriteLine("|----------------------zone 1-----------------------|");
                 Console.WriteLine("|                " + DateTime.Now + "                |");
-                //Console.WriteLine("array novo, devia dar matricula -> " + CarPlate._plateArrayZone1.Count());
-                //Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.listaZona1.Count());
-                //Console.WriteLine("array novo, devia dar matricula -> " + CarPlate.listaZona1[0]);
                 Console.WriteLine("|                                                   |");
                 Console.WriteLine("  >>>Car Plate: {0}                                 ", carPlateZone1);
-                Console.WriteLine("  >>>You can be parked until: {0}                   ", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone1(total))));
+                Console.WriteLine("  >>>You can be parked until: {0}                   ", DateTime.Now.Add(tSpanZone1));
                 Console.WriteLine("|                                                   |");
-                Console.WriteLine("|______Press X if you want to park another car______|\n|______or press other key if you want to leave______|");
+                Console.WriteLine("|______Press X if you want to park another car______|");
+                Console.WriteLine("|______or press other key if you want to leave._____|");
 
-                string done = Console.ReadLine();
-                if (done == "x")
-                {
-                    // Console.WriteLine("You will be sent to the Client Menu!"); NÃO APARECE
-                    AllMenus.ClientMenu();
-                }
-                else 
-                {
-                    //Console.WriteLine("Thank you and have a nice day!"); NÃO APARECE
-                    AllMenus.Start();
-                }
+                //If the user wants to park another car, will be sent to menu start
+                Console.Write("->"); string done = Console.ReadLine();
+                if (done == "x") { AllMenus.ClientMenu(); }
+                else { AllMenus.Start(); }
             }
+            //If the user doesn't want to park and want's a refund
             if (ticket == "n")
             {
                 Console.WriteLine(" ___________________________________________________ ");
                 Console.WriteLine("|              You will be refunded                 |");
                 moneyMachine.refundCash();
                 Console.WriteLine("|____Are you sure you want to leave? (y) or (n)_____|");
-                string sure = Console.ReadLine();
-                if(sure == "y") { AllMenus.ClientMenu(); }
+
+                Console.Write("->"); string sure = Console.ReadLine();
+                if (sure == "y") { AllMenus.ClientMenu(); }
                 else { AllMenus.Zone1(); }
             }
-            else
-            {
-                Switchdefault(); //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
-                AllMenus.Zone1();
-            }
+            //By default the user is sent to menu zone 1
+            else { Switchdefault(); AllMenus.Zone1(); }
+            
         }
 
+        //========================= Client Zone2 ========================//
+        //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
         public static void Zone2() //Zone2 Interactive Menu
         {
-            Console.Clear();
-            Console.WriteLine(" ___________________________________________________");
-            Console.WriteLine("|                  Zone 2 selected                  |");
-            Console.WriteLine("|                " + DateTime.Now + "                |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|------------------Price/max.Hour-------------------|");
-            Console.WriteLine("|                1€/h  max.2 hours                  |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|________________>Insert your Plate:<_______________|"); //Ask the user for a Car Plate
+            //Call prints for Zone2 Menu
+            ConsolePrints.PrintZone2();
+
+            //Ask the user for a Car Plate
             string carPlateZone2 = Console.ReadLine();
-
-
-            CarPlate.listaZona2.Add(carPlateZone2); //ALTERAR!!
+            Console.Write("->"); CarPlate.listaZona2.Add(carPlateZone2);
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
+            double insertMoneyZone2;
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
             double total; //Variable to accept the same amount of cash inserted in the MoneyMachine method
             ParkPayment paidpark = new ParkPayment();
 
+            //Creating a time span to be added
+            Schedule timeZone2 = new Schedule();
+            TimeSpan tSpanZone2 = new TimeSpan();
+
+            DateTime novaData = new DateTime();
+            //Days of the week and schedule rules
             do
             {
+                //The client insert the cash and the time is calculated
                 Console.WriteLine("|________________>Insert your cash:<________________|");
-                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-
-
-                if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
+                Console.Write("->"); insertMoneyZone2 = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
+                total = paidpark.PayInZone2(insertMoneyZone2);
+                timeZone2.CalculateTime(total);
+                tSpanZone2 = new TimeSpan(Convert.ToInt32(timeZone2.Day), Convert.ToInt32(timeZone2.Hour), Convert.ToInt32(timeZone2.Minute), Convert.ToInt32(timeZone2.Second));
+                novaData.Add(tSpanZone2);
+                //If it's a day of the week, bettween 9 am and 8 pm and if the time counted is less than 120 min         
+                if ((int)DateTime.Now.DayOfWeek != 0 && (int)DateTime.Now.DayOfWeek != 6 && DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 20 && total <= 120)
                 {
-                    if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.Hour > 9 && DateTime.Now.Hour < 20)
-                    {
-                        if (paidpark.PayInZone2(total) <= 120)
-                        {
-                            Console.WriteLine(">>>You have now paid for {0} minutes.\n", Math.Round(paidpark.PayInZone2(total)));
-                            Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
-                            Console.WriteLine("|                                                   |");
-                            Console.WriteLine("|__________Press zero(0) to stop counting___________|");
-                        }
-
-                        else
-                        {
-                            Console.WriteLine(" !!! You can only be parked for 2 hours máx! Don´t print the ticket to receive a refund !!!\n");
-                            stop = false;
-                        }
-                    }
-                    else
-                    {
-                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14)
-                        {
-                            if (paidpark.PayInZone2(total) <= 120)
-                            {
-                                Console.WriteLine(DateTime.Now);
-                                Console.WriteLine(">>>You have now paid for {0} minutes.\n", Math.Round(paidpark.PayInZone2(total)));
-                                Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
-                                Console.WriteLine("|                                                   |");
-                                Console.WriteLine("|__________Press zero(0) to stop counting___________|");
-                            }
-                            else
-                            {
-                                Console.WriteLine(" !!!You can only be parked for 2 hours máx! Don´t print the ticket to receive a refund!!! ");
-                                stop = false;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine(" >You can Park for Free before 9 and after 20h. You will be refunded!< ");
-                            stop = false;
-                        }
-                    }
+                    Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone2.Minutes);
+                    Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone2));
+                    Console.WriteLine("|                                                   |");
+                    Console.WriteLine("|__________Press zero(0) to stop counting___________|");
                 }
-                else
+                //If it's a saturday, bettween 9 am and 2 pm and if the time counted is less than 120 min  
+                else if ((int)DateTime.Now.DayOfWeek == 6 && DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 14 && total <= 120)
                 {
-                    Console.WriteLine(" >You can Park for Free on Sundays.\nIf you inserted money you will be refounded!< ");
+                    Console.WriteLine(DateTime.Now);
+                    Console.WriteLine(">>>You have now paid for {0} minutes.\n", tSpanZone2.Minutes);
+                    Console.WriteLine("|   You can be parked until: {0}    |", DateTime.Now.Add(tSpanZone2));
+                    Console.WriteLine("|                                                   |");
+                    Console.WriteLine("|__________Press zero(0) to stop counting___________|");
+                }
+                //If it's a sunday
+                else if ((int)DateTime.Now.DayOfWeek == 0)
+                {
+                    Console.WriteLine(" >You can Park for Free on Sundays.<\n>You will be refunded if you don´t print the ticket!< ");
                     stop = false;
                 }
-
-                /*moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                Console.WriteLine("You can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
-                Console.WriteLine("Press zero(0) if you want to stop counting.");*/
-                if (moneyMachine._cash == 0) { stop = false; }
+                //If exceeds the time allowed for the zone 
+                else
+                {
+                    timeZone2.CompareDate(novaData);
+                    Console.WriteLine(" !!!You can only be parked for 2 hours max! Don´t print the ticket to receive a refund!!!\n");
+                    stop = false;
+                }
+                //If the user input is Zero(0) coins it stops counting
+                if (insertMoneyZone2 == 0) { stop = false; }
             } while (stop == true);
 
-            //For Print ticket
-            Console.WriteLine("\n ___________________________________________________ ");
-            Console.WriteLine("|         Do you want to print your ticket?         |\n|__________________yes(y) or no(n)__________________|\n");
-            string ticket = Console.ReadLine(); //user input to navigate through the Menu
+            //=============== Asking the user if he wants to Print a ticket ===============// 
+            ConsolePrints.PrintTicket();
+
+            //======= User input to navigate through integreated Ticket Menu ========//
+            Console.Write("->"); string ticket = Console.ReadLine(); 
             if (ticket == "y")
             {
                 Console.Clear();
@@ -421,263 +434,133 @@ namespace Menus
                 Console.WriteLine("|                " + DateTime.Now + "                |");
                 Console.WriteLine("|                                                   |");
                 Console.WriteLine("  >>>Car Plate: {0}                                 ", carPlateZone2);
-                Console.WriteLine("  >>>You can be parked until: {0}                   ", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone2(total))));
+                Console.WriteLine("  >>>You can be parked until: {0}                   ", DateTime.Now.Add(tSpanZone2));
                 Console.WriteLine("|                                                   |");
-                Console.WriteLine("|______Press X if you want to park another car______|\n|______or press other key if you want to leave______|");
-         
+                Console.WriteLine("|______Press X if you want to park another car______|");
+                Console.WriteLine("|______or press other key if you want to leave______|");
 
-                string done = Console.ReadLine();
-                if (done == "x")
-                {
-                    Console.WriteLine("You will be sent to the Client Menu!");
-                    AllMenus.ClientMenu();
-                }
-                else
-                {
-                    Console.WriteLine("Thank you and have a nice day!");
-                    AllMenus.Start();
-                }
+                //If the user wants to park another car, will be sent to menu start
+                Console.Write("->"); string done = Console.ReadLine();
+                if (done == "x") { AllMenus.ClientMenu(); }
+                else { AllMenus.Start(); }
             }
+            //If the user doesn't want to park and want's a refund
             if (ticket == "n")
             {
                 Console.WriteLine(" ___________________________________________________ ");
                 Console.WriteLine("|              You will be refunded                 |");
                 moneyMachine.refundCash();
                 Console.WriteLine("|____Are you sure you want to leave? (y) or (n)_____|");
-                string sure = Console.ReadLine();
+                Console.Write("->"); string sure = Console.ReadLine();
                 if (sure == "y") { AllMenus.ClientMenu(); }
                 else { AllMenus.Zone2(); }
             }
-            else
-            {
-                Switchdefault(); //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
-                AllMenus.Zone2();
-            }
+            //By default the user is sent to menu zone 2
+            else { Switchdefault(); AllMenus.Zone2(); }
         }
 
-        public static void Zone3() //Zone3 Interactive Menu
+        //========================= Client Zone3 ========================//
+        //ref. https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=net-6.0
+        //ref. https://docs.microsoft.com/en-us/dotnet/api/system.timespan.days?view=net-6.0
+        //ref. https://docs.microsoft.com/en-us/dotnet/api/system.datetime.subtract?view=net-6.0
+        //ref. https://iditect.com/guide/csharp/csharp_howto_convert_datetime.html
+        //ref. https://stackoverflow.com/questions/8702603/merging-two-objects-in-c-sharp
+        //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
+        public static void Zone3() 
         {
-            Console.Clear();
-            Console.WriteLine(" ___________________________________________________");
-            Console.WriteLine("|                  Zone 3 selected                  |");
-            Console.WriteLine("|                " + DateTime.Now + "                |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|------------------Price/max.Hour-------------------|");
-            Console.WriteLine("|               0.62€/h - no max.hours              |");
-            Console.WriteLine("|                                                   |");
-            Console.WriteLine("|________________>Insert your Plate:<_______________|"); //Ask the user for a Car Plate
-            string carPlateZone3 = Console.ReadLine();
-            //CarPlate newCarPlate = new CarPlate("0", "0", carPlateZone3);
+            //Call prints for Zone3 Menu
+            ConsolePrints.PrintZone3();
+
+            //Ask the user for a Car Plate
+            Console.Write("->"); string carPlateZone3 = Console.ReadLine();
+            CarPlate.listaZona3.Add(carPlateZone3);
 
             //Do the cicle of adding coin into the machine by invoking the MoneyMachine Class
             bool stop = true;
+            double insertMoney;
             MoneyMachine moneyMachine = new MoneyMachine();
 
             //Cheak the time
-            double total = moneyMachine._addCash;
+            double total = 0;
             ParkPayment paidpark = new ParkPayment();
+            Schedule newSchedule = new Schedule();
 
             //TimeSpan to change date based on paid hours
-            //https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=net-6.0
-            //https://docs.microsoft.com/en-us/dotnet/api/system.timespan.days?view=net-6.0
-            //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.subtract?view=net-6.0
-
-            int days = 0;
-            int hour = 0;
-            int minute = 0;
-            int second = 0;
-            TimeSpan timeSpan;
-
-            int PaidTotalTime;
-            object dataNow;
+            TimeSpan _TimeSpan = new TimeSpan();
+            DateTime _loopDate = DateTime.Now;
+            DateTime result = new DateTime();
+            
             do
             {
-                Console.WriteLine("|________________>Insert your cash:<________________|");
-                total = moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                PaidTotalTime = Convert.ToInt32(Math.Round(paidpark.PayInZone3(total)));
-               
+                //the user inserts the coins and it gives the total paid
+                //Console.WriteLine("data inicial = _loopDate " + _loopDate);
+                Console.WriteLine("\nInsert your cash:");
+                Console.Write("->"); insertMoney = Convert.ToDouble(Console.ReadLine());
+                total = paidpark.PayInZone3(moneyMachine.insertingCash(insertMoney));
 
-                //======== Calculate time ======
-                /*if (paidpark.PayInZone3(total) < 60)
+                if (insertMoney != 0) 
                 {
-                    minute = PaidTotalTime;
+                    //Calculate time of parking
+                    newSchedule.CalculateTime(Math.Round(total));
+                    Console.WriteLine("\n Tempos Calculados {0}d, {1}h, {2}m", newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
+
+                    result = newSchedule.ScheduleForZone(_loopDate, newSchedule.Day, newSchedule.Hour, newSchedule.Minute);
+                    Console.WriteLine("\nData saida " + result);
+                    //newSchedule.CompareDate(result);
                 }
-                if (paidpark.PayInZone3(total) == 60)
+                else 
                 {
-                    hour += 1;
-
-                    if(hour > 0 && PaidTotalTime < 60) 
-                    {
-                        
-                        minute = PaidTotalTime - 60;
-                    }
-                    else 
-                    {
-                        hour += 1;
-                        minute = PaidTotalTime - 60;
-                    }
+                    Console.WriteLine(" >You can Park for Free before 9 and after 20h.");
+                    stop = false;
                 }
-                if (paidpark.PayInZone3(total) >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
-                {
-                    days += 1;
-                    PaidTotalTime = PaidTotalTime - 1440;
-                }
-                timeSpan = new TimeSpan(days, hour, minute, second);*/
-
-
-                while (PaidTotalTime > 0) {
-
-                    if (PaidTotalTime >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
-                    {
-                        days += 1;
-                        PaidTotalTime = PaidTotalTime - 1440;
-                    }
-                    else if (PaidTotalTime >= 60)
-                    {
-                        hour += 1;
-                        PaidTotalTime = PaidTotalTime - 60;
-                    }
-                    if (PaidTotalTime < 60)
-                    {
-                        minute = PaidTotalTime;
-                        break;
-                    }
-
-                }
-                timeSpan = new TimeSpan(days, hour, minute, second);
-
-                /*if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday ) //Week schedule
-                    {
-                        Console.WriteLine(DateTime.Now);
-                        Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                        Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                        Console.WriteLine("Press zero(0) to stop counting.");
-
-                    }
-                    else
-                    {
-                        if (DateTime.Now.Hour > 9 && DateTime.Now.Hour < 14) //Saturdays Open Hours
-                        {
-                            Console.WriteLine(DateTime.Now);
-                            Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                            Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                            Console.WriteLine("Press zero(0) to stop counting.");
-
-                        }
-                        else
-                        {
-                            Console.WriteLine("You can Park for Free before 9 and after 20h. You will be refunded!"); //the client can´t be refunded
-                            stop = false;
-                        }
-                    }
-                }
-                else //domingo
-                {
-                    
-                    
-
-                    Console.WriteLine(DateTime.Now);
-                    Console.WriteLine("You have now paid for {0} minutes.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                    Console.WriteLine("You can be parked until: {0}", DateTime.Now.Add(timeSpan));
-                    Console.WriteLine("Press zero(0) to stop counting.");
-                }*/
-
-                /*
-                //TimeSpan timesub = new TimeSpan(0, 13, 0, 0);
-                //dataNow = DateTime.Now - DateTime.Now.Subtract(0, 0, DayOfWeek.Monday, DateTime.Now.AddHours(13), 0, 0);
-                //dataNow = ObjectMerger.MergeObjects(dataNow, DateTime.Now.Add(timeSpan));
-                //dataNow = DateTime.Now.Add(timeSpan);
-
-
-                //TimeSpan timeSpan = new TimeSpan(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, Math.Abs(DateTime.Now.Hour - 9), 0, 0)
-                DateTime diaSeguinte = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.AddDays(1), DateTime.Now.Hour + Math.Abs(DateTime.Now.Hour - 13), DateTime.Now.Minute + Math.Abs(DateTime.Now.Minute - 0), 0);
-                DateTime Realtime = DateTime.Now - DateTime.Now.Subtract(diaSeguinte);
-
-                TimeSpan span = (TimeZoneInfo.ConvertTimeToUtc(Realtime) - diaSeguinte); //+ timeSpan;
-                DateTime Nova = DateTime.Now.Add(span);
-               // Nova = Nova.Add(timeSpan);
-
-                //span = TimeZoneInfo.ConvertTimeToUtc(Realtime) - diaSeguinte;
-                //unixTimestamp = span.TotalHours;
-
-
-
-                Console.WriteLine("===!!=!=!=!=!=!=!" + Nova);*/
-
-                //Se o dateTime.Now = sabado dps das 14h, ele salta dois dias. Depois adiciona o tempo pago restante
-                //Se o dateTime.Now = domingo a qualquer hora entre as 00h (sabado) e as 24h (domingo)
-                //https://iditect.com/guide/csharp/csharp_howto_convert_datetime.html
-                //https://stackoverflow.com/questions/8702603/merging-two-objects-in-c-sharp
-               
-
-
-
-
-                //ALERT DONT DELETE!!!
-                /*  Console.WriteLine(DateTime.Now);
-                  Console.WriteLine("You have now paid for {0} minutes.", Math.Round(paidpark.PayInZone3(total))); //===!!!=!=!=!
-                  Console.WriteLine("You can be parked until: {0}", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));//DateTime.Now.Add(timeSpan));
-                  Console.WriteLine("Press zero(0) to stop counting.");*/
-
-
-
-                /*moneyMachine.insertingCash(Convert.ToDouble(Console.ReadLine()));
-                Console.WriteLine("You can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                Console.WriteLine("Press zero(0) if you want to stop counting.");*/
-                if (moneyMachine._cash == 0) { stop = false; }
             } while (stop == true);
 
-            //For Print ticket
-            Console.WriteLine("Do you want to print your ticket? \n yes(y) or no(n)");
-            string ticket = Console.ReadLine(); //user input to navigate through the Menu
+            //Asks if the user wants to print the ticket
+            ConsolePrints.PrintTicket();
+
+            //user input to navigate through the Menu
+            Console.Write("->"); string ticket = Console.ReadLine(); 
             if (ticket == "y")
             {
                 Console.Clear();
-                Console.WriteLine("ticket");
-                Console.WriteLine("----zone 3----");
-                Console.WriteLine(DateTime.Now);
-                Console.WriteLine("Car Plate: {0}", carPlateZone3);
-                Console.WriteLine("\nYou can be parked for {0} time.", DateTime.Now.AddMinutes(Math.Round(paidpark.PayInZone3(total))));
-                Console.WriteLine("Press X if you want to park another car,\nor press other key if you want to leave.");
+                Console.WriteLine(" ___________________________________________________ ");
+                Console.WriteLine("|                      TICKET                       |");
+                Console.WriteLine("|----------------------zone 3-----------------------|");
+                Console.WriteLine("|                " + DateTime.Now + "                |");
+                Console.WriteLine("|                                                   |");
+                Console.WriteLine("  >>>Car Plate: {0}                                 ", carPlateZone3);
+                Console.WriteLine("  >>>You can be parked until: {0}                   ", result);
+                Console.WriteLine("|                                                   |");
+                Console.WriteLine("|______Press X if you want to park another car______|");
+                Console.WriteLine("|______or press other key if you want to leave______|");
 
-                string done = Console.ReadLine();
-                if (done == "x")
-                {
-                    Console.WriteLine("You will be sent to the Client Menu!");
-                    AllMenus.ClientMenu();
-                }
-                else
-                {
-                    Console.WriteLine("Thank you and have a nice day!");
-                    AllMenus.Start();
-                }
+
+
+                //If the user wants to park another car, will be sent to menu start
+                Console.Write("->"); string done = Console.ReadLine();
+                if (done == "x") { AllMenus.ClientMenu(); }
+                else { AllMenus.Start(); }
             }
+            //If the user doesn't want to park and want's a refund
             if (ticket == "n")
             {
                 Console.WriteLine("You will be refounded.");
                 moneyMachine.refundCash();
                 Console.WriteLine("Are you sure you want to leave? y or n");
-                string sure = Console.ReadLine();
+                Console.Write("->"); string sure = Console.ReadLine();
                 if (sure == "y") { AllMenus.ClientMenu(); }
                 else { AllMenus.Zone3(); }
             }
-            else
-            {
-                Switchdefault(); //ref. https://www.xsprogram.com/content/how-to-jump-to-another-case-statement-in-a-switch-case-condition-with-the-value.html
-                AllMenus.Zone3();
-            }
+            //By default the user is sent to menu zone 3
+            else { Switchdefault(); AllMenus.Zone3(); }
         }
 
-        //============================================= Zones for the Admin =============================================//
-        //Need to create a now void with switch, otherwise the program go to start();
-        public static void ZoneAdmin1() //Admin report for Zone1
+        //============================================= Admin Report In Zone1 =============================================//
+        //Need to create a new void with switch, otherwise the program go to start();
+        public static void ZoneAdmin1()
         {
+            //Call Prints Admin Report Zone1 Menu
             ConsolePrints.ReportZone1();
-            Console.WriteLine("|________Back to Admin menu [0]___________|");
-            Console.WriteLine("|________Back to Main menu [1]____________|");
-            Console.WriteLine("|________Back to standby menu [2]_________|");
 
             int userSelection = int.Parse(Console.ReadLine());
             switch (userSelection)
@@ -694,12 +577,11 @@ namespace Menus
             }
         }
 
-        public static void ZoneAdmin2() //Admin report for Zone2
+        //============================================= Admin Report In Zone2 =============================================//
+        public static void ZoneAdmin2()
         {
+            //Call Prints Admin Report Zone2 Menu
             ConsolePrints.ReportZone2();
-            Console.WriteLine("|________Back to Admin menu [0]___________|");
-            Console.WriteLine("|________Back to Main menu [1]____________|");
-            Console.WriteLine("|________Back to standby menu [2]_________|");
 
             int userSelection = int.Parse(Console.ReadLine());
             switch (userSelection)
@@ -716,12 +598,11 @@ namespace Menus
             }
         }
 
-        public static void ZoneAdmin3() //Admin report for Zone3
+        //============================================= Admin Report In Zone3 =============================================//
+        public static void ZoneAdmin3()
         {
+            //Call Prints Admin Report Zone3 Menu
             ConsolePrints.ReportZone3();
-            Console.WriteLine("|________Back to Admin menu [0]___________|");
-            Console.WriteLine("|________Back to Main menu [1]____________|");
-            Console.WriteLine("|________Back to standby menu [2]_________|");
 
             int userSelection = int.Parse(Console.ReadLine());
             switch (userSelection)
