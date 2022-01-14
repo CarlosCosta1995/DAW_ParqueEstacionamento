@@ -277,15 +277,8 @@ namespace Functionalities
         public double _timePaidForZone1;//Stores the value Calculated by the function PayInZone1()
         public double PayInZone1(double _addCash) //Calculating the payment for Zone1
         {
-            //Verificar o dia da semana, e horario de estacionamento DONE!
-            //Tempo maximo limite dos 45 DONE!
-            //Somar os minutos do resultado com a data e hora actual. DONE!
-            //[extra]o restante addicionar ao dia seguinte ZONA3
-
-
-            //Console.WriteLine("POOAWKAOw" + _addCash);
+                      
             _timePaidForZone1 = (_addCash * _maxMinutesInZone1) / _timePerHourZone1;
-            //Console.WriteLine("Tempo !!!#!" + _timePaidForZone1);
             return _timePaidForZone1;
             
         }
