@@ -8,57 +8,61 @@ using Menus;
 using ConsolePrint;
 
 namespace Functionalities
-{
-    public class CarPlate
-    {
-        //Method that receives the car plates inserted by the user
-        //Stores into the Arrays
-        //Outputs a list of plates and a quantity of plate. 
 
+{
+    //============================== Class CarPlate ==============================//
+    //Method that receives the car plates inserted by the user
+    //Stores into the Arrays
+    //Outputs a list of plates and a quantity of plate.
+    //ref. https://docs.microsoft.com/en-us/learn/modules/csharp-arrays-operations/3-exercise-clear-resize#code-try-9
+    //ref. https://www.javatpoint.com/program-to-count-the-total-number-of-characters-in-a-string
+    public class CarPlate
+
+    {
         //Creating an Array to store the plates.
         public static List<string> listaZona1 = new List<string> { };
         public static List<string> listaZona2 = new List<string> { };
         public static List<string> listaZona3 = new List<string> { };
 
-
         //Atribute carsInZone, the value of the amount of cars (listaZona1.Count()) from the Zones List
-        public int carsInZone1 = listaZona1.Count();
-        public int carsInZone2 = listaZona2.Count();
-        public int carsInZone3 = listaZona3.Count();
+        private static int carsInZone1 = 0;
+        private static int carsInZone2 = 0;
+        private static int carsInZone3 = 0;
 
         //Define and atribute variables for each zone
         public static int carSlotsZone1 = 50;
         public static int carSlotsZone2 = 100;
         public static int carSlotsZone3 = 70;
 
-        //Stores the variable of occupied cars by Zone.
-        public static int CarsInZone1;
-        public static int CarsInZone2;
-        public static int CarsInZone3;
-
-        //Atributes the arrays.Length variable to public satic variable
-        //public static int CarsInZone1;// NÃO É NECESSÁRIO
-
-        //public static string tteste = "qwe"; NÃO É NECESSÁRIO
-
-        //Atributing values to the current class from outside sources.
-        /*public CarPlate1(string carPlateZone1)
+        //=============== Stores the variable of occupied cars ===============//
+        //Cars in Zone1
+        public static int CarsInZone1 
         {
-
-            _carPlateZone1 = carPlateZone1;
+            get { return listaZona1.Count(); }
+            set { carsInZone1 = value; }
         }
 
-        public CarPlate2(string carPlateZone2)
+        //Cars in Zone1
+        public static int CarsInZone2
         {
-
-            _carPlateZone2 = carPlateZone2;
+            get { return listaZona2.Count(); }
+            set { carsInZone2 = value; }
         }
 
-        public CarPlate3(string carPlateZone3)
+        //Cars in Zone1
+        public static int CarsInZone3
         {
+            get { return listaZona3.Count(); }
+            set { carsInZone3 = value; }
+        }
 
-            _carPlateZone3 = carPlateZone3;
-        }*/
+        //Total amount of Cars in all Zones
+        public static int TotalCarsInZones 
+        {
+            get { return listaZona1.Count() + listaZona2.Count() + listaZona3.Count(); }
+            set { TotalCarsInZones = value; }
+        }
+        //THINGS WE TRIED 
 
         /* string[] pallets = { "B14", "A11", "B12", "A13" };
            Console.WriteLine("");
@@ -74,52 +78,55 @@ namespace Functionalities
 
 
         //Store and Counts Array elements for Zone1
+        /* public void occupiedSlotsZone1() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone1.
+         {
+             
 
-        public void occupiedSlotsZone1() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone1.
-        {
-            //https://www.javatpoint.com/program-to-count-the-total-number-of-characters-in-a-string
+             if (carsInZone1 < ZoneAvailability.carSlotsZone1) //how to do a ramdom clear
+             {
+                 carsInZone1 = carsInZone1 + 1;
+             }
+             else
+             {
+                 carsInZone1 = carsInZone1 - 1;
+             }
+             CarsInZone1 = carsInZone1;
+         }
 
-            if (carsInZone1 < ZoneAvailability.carSlotsZone1) //how to do a ramdom clear
-            {
-                carsInZone1 = carsInZone1 + 1;
-            }
-            else
-            {
-                carsInZone1 = carsInZone1 - 1;
-            }
-            CarsInZone1 = carsInZone1;
-        }
-        //Store and Counts Array elements for Zone2
+         //Store and Counts Array elements for Zone2
+         public void occupiedSlotsZone2() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone2.
+         {
+             if (carsInZone2< ZoneAvailability.carSlotsZone2)
+             {
+                 carsInZone2 = carsInZone2 + 1;
+             }
+             else
+             {
+                 carsInZone2 = carsInZone2 - 1;
+             }
+             CarsInZone2 = carsInZone2;
+         }
 
-        public void occupiedSlotsZone2() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone2.
-        {
-            if (carsInZone2< ZoneAvailability.carSlotsZone2)
-            {
-                carsInZone2 = carsInZone2 + 1;
-            }
-            else
-            {
-                carsInZone2 = carsInZone2 - 1;
-            }
-            CarsInZone2 = carsInZone2;
-        }
+         //Store and Counts Array elements for Zone3
+         public void occupiedSlotsZone3() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone3.
+         {
 
-        //Store and Counts Array elements for Zone3
-        public void occupiedSlotsZone3() //Counts how many plates are in the array and removes one if reaches the zone full capacity for Zone3.
-        {
-
-            if (carsInZone2 < ZoneAvailability.carSlotsZone3)
-            {
-                carsInZone3 = carsInZone3 + 1;
-            }
-            else
-            {
-                carsInZone3 = carsInZone3 - 1;
-            }
-            CarsInZone3 = carsInZone3;
-        }      
+             if (carsInZone2 < ZoneAvailability.carSlotsZone3)
+             {
+                 carsInZone3 = carsInZone3 + 1;
+             }
+             else
+             {
+                 carsInZone3 = carsInZone3 - 1;
+             }
+             CarsInZone3 = carsInZone3;
+         }*/
     }
-
+    //============================== Class ZoneAvailability ==============================//
+    //Method that receives the arrays from CarPlate Method
+    //Calculates the available car slots (Quantity of zone slots - occupied slots in the zone given by the CarsInZoneX)
+    //Outputs the Available slots
+    
     public class ZoneAvailability
     {
         //Method that receives the arrays from CarPlate Method
@@ -136,49 +143,34 @@ namespace Functionalities
         public static int _numOccupiedCarInZone2;
         public static int _numOccupiedCarInZone3;
 
-        public static void AvailableSlotsZone1() //Calculate the number of slots available a car in the Zone1.
+        //=============== Stores the variable for available car slots ===============//
+        //Available car slots in Zone1
+        public static int AvailableCarSlotsInZone1
         {
-            if (CarPlate.listaZona1.Count() == carSlotsZone1)
-            {
-                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone1) out of Free slots(carSlotsZone1).
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone1, carSlotsZone1);
-                AllMenus.ClientMenu();
-            }else 
-            {
-                _numOccupiedCarInZone1 = ZoneAvailability.carSlotsZone1 - CarPlate.listaZona1.Count();
-            } 
-
-           // return _numOccupiedCarInZone1;
+            get { return carSlotsZone1 - CarPlate.CarsInZone1; }
+            set { AvailableCarSlotsInZone1 = value; }
         }
 
-        public  void AvailableSlotsZone2() //Calculate the number of slots available in the Zone2.
+        //Available car slots in Zone1
+        public static int AvailableCarSlotsInZone2
         {
-
-            if (CarPlate.listaZona2.Count() == carSlotsZone2)
-            {
-                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone2) out of Free slots(carSlotsZone2).
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone2, carSlotsZone2);
-                AllMenus.ClientMenu();
-            }
-            else
-            {
-                _numOccupiedCarInZone2 = ZoneAvailability.carSlotsZone2 - CarPlate.listaZona2.Count();
-            }
+            get { return carSlotsZone2 - CarPlate.CarsInZone2; }
+            set { AvailableCarSlotsInZone2 = value; }
         }
 
-        public void CountingCarsZone3() //Calculate the number of slots available in the Zone3.
+        //Available car slots in Zone1
+        public static int AvailableCarSlotsInZone3
         {
-            if (CarPlate.listaZona3.Count() == carSlotsZone3)
-            {
-                //======= Zone is full, Occupiedslots(_numOccupiedCarInZone3) out of Free slots(carSlotsZone3).
-                Console.WriteLine("Zone is full, {0} out of {1}. Returning to back to Menu.", _numOccupiedCarInZone3, carSlotsZone3);
-                AllMenus.ClientMenu();
-            }
-            else
-            {
-                _numOccupiedCarInZone3 = ZoneAvailability.carSlotsZone3 - CarPlate.listaZona3.Count();
-            }
+            get { return carSlotsZone3 - CarPlate.CarsInZone3; }
+            set { AvailableCarSlotsInZone3 = value; }
         }
+
+        //Available car slots for all Zones
+        public static int TotalAvailableCarSlotsInZones
+        {
+            get { return AvailableCarSlotsInZone1 + AvailableCarSlotsInZone2 + AvailableCarSlotsInZone3; }
+            set { TotalAvailableCarSlotsInZones = value; }
+        } 
 
     }
 
@@ -186,25 +178,33 @@ namespace Functionalities
     {
         //Receives the cash from the user input
         //Pre-define Money accepted by the Machine
-        //Compares the User input with the accept Money ???
-        //Make the addition os cash inserted by the user
-        //Calculates all Money inserted in the machine
+        //Compares the User input with the accept Money coins
+        //Make the addition of cash inserted by the user
+        //Calculates all Money inserted in the machine for all Zones
         //Reset the cash inserted
+        //Refounds the money inserted if the user ask for it
         //https://stackoverflow.com/questions/51007525/c-sharp-displaying-total-amount-of-money-in-a-class-instance
         //https://youtu.be/33czhZrH51s
+        //******************************************************//
 
-        //Creating a varible to receive the cash
+        //Varible to receive the cash
         public double _cash;
-        public double _addCash { get; set; }
-        public static double _machineTotalAmount { get; set; }
-        public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 }; 
-        //change coins: can´t accept more than 50 cent because- zone1 max. 45 min which is up to 85 cent - zone2 max 1h which is up to 2€
-        //define what happens when the client uses other coins, letters or negative numbers
-        
-       
-        public double insertingCash(double amount) //Asks the user to insert an amount of money
-        {
 
+        //Varible to continue add received cash
+        public double _addCash { get; set; }
+
+        //Varible to continue add received cash provided by all Zones
+        public static double _machineTotalAmount { get; set; }
+
+        //Acceptance Money coins for the machine
+        //Don't accept coins out the array, letters or negative numbers written by the user
+        public double[] acceptedCash = { 0.00, 0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00 };
+
+
+        //=============== Asking the user if he wants to Print a ticket ===============//
+        //Asks the user to insert an amount of money
+        public double insertingCash(double amount)
+        {
             //Verify if the amount inserted is contained in the AcceptedCash Array
             //https://stackoverflow.com/questions/13257458/check-if-a-value-is-in-an-array-c
             //https://stackoverflow.com/questions/61448526/java-checking-if-a-variable-is-equal-to-any-of-the-array-elements

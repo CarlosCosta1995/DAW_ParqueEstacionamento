@@ -121,7 +121,9 @@ namespace ConsolePrint
             Console.WriteLine("|            _Report zone [2]_            |");
             Console.WriteLine("|            _Report zone [3]_            |");
             Console.WriteLine("|                                         | ");
-            Console.WriteLine("  >>>Total money of the day is:{0}         ", MoneyMachine._machineTotalAmount);//Total Money from the 3 Zones ============FAZER!!!!!!!!!!!!!
+            Console.WriteLine("  >>>Total money of the day is:{0}         ", MoneyMachine._machineTotalAmount);
+            Console.WriteLine("  >>>Total of slots occupied:{0}         ", CarPlate.TotalCarsInZones);
+            Console.WriteLine("  >>>Total of slots available:{0}         ", ZoneAvailability.TotalAvailableCarSlotsInZones);
             Console.WriteLine("|                                         | ");
             Console.WriteLine("|__________Back to main menu [4]__________|");
             Console.WriteLine("|_____________Stand By UI [0]_____________|");
@@ -135,9 +137,9 @@ namespace ConsolePrint
             Console.WriteLine("|___________" + (DateTime.Now) + "___________|");
             Console.WriteLine("|                                         |");
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
-            Console.WriteLine("   >>>There are {0} available slots.", CarPlate.carSlotsZone1 - CarPlate.listaZona1.Count());//Available Slots (50)
+            Console.WriteLine("   >>>There are {0} available slots.", ZoneAvailability.AvailableCarSlotsInZone1);//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
-            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona1.Count());//Occupied Slots
+            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.CarsInZone1);//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
             Console.WriteLine("|________Back to Admin menu [0]___________|");
@@ -154,9 +156,9 @@ namespace ConsolePrint
             Console.WriteLine("|___________" + (DateTime.Now) + "___________|");
             Console.WriteLine("|                                         |");
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
-            Console.WriteLine("   >>>There are {0} available slots.", CarPlate.carSlotsZone2 - CarPlate.listaZona2.Count());//Available Slots (50)
+            Console.WriteLine("   >>>There are {0} available slots.", ZoneAvailability.AvailableCarSlotsInZone2);//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
-            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona2.Count());//Occupied Slots
+            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.CarsInZone2);//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
             Console.WriteLine("|________Back to Admin menu [0]___________|");
@@ -172,9 +174,9 @@ namespace ConsolePrint
             Console.WriteLine("|___________" + (DateTime.Now) + "___________|");
             Console.WriteLine("|                                         |");
             //Console.WriteLine(av1.AvailableSlotsZone1(0, 0) - 1);//Available Slots
-            Console.WriteLine("   >>>There are {0} available slots.", CarPlate.carSlotsZone3 - CarPlate.listaZona3.Count());//Available Slots (50)
+            Console.WriteLine("   >>>There are {0} available slots.", ZoneAvailability.AvailableCarSlotsInZone3);//Available Slots (50)
             //Console.WriteLine(car1.occupiedSlotsZone1("00") - 1);//Occupied Slots
-            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.listaZona3.Count());//Occupied Slots
+            Console.WriteLine("   >>>There are {0} ocupied slots", CarPlate.CarsInZone3);//Occupied Slots
             Console.WriteLine(); //Cars that exceed the time allowed, HOW TO COUNT?
             Console.WriteLine("|_____________End of Report_______________| ");
             Console.WriteLine("|________Back to Admin menu [0]___________|");
