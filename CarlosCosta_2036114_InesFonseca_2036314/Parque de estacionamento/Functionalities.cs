@@ -525,7 +525,7 @@ namespace Functionalities
                 _openTimeWeek.Add(_CompareDates);
                 _dateTimePaid = _closeTimeWeek;
 
-                Console.WriteLine("\nYou can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
+                Console.WriteLine("\n >>>You can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
             }
             //If it is Saturdays after 2pm
             else if ((int)data.DayOfWeek == 6 && _dateTimePaid.Hour >= 14)
@@ -537,12 +537,12 @@ namespace Functionalities
                 _openTimeWeek.Add(_CompareDates);
                 _dateTimePaid = _closeTimeSaturday;
 
-                Console.WriteLine("\nYou can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
+                Console.WriteLine("\n >>>You can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
             }
             //If it is Sundays between 9am to 8pm, it that schedule because that way we can only add a day and it is ready for monday 9am
             else if ((int)_dateTimePaid.DayOfWeek == 0 && _dateTimePaid.Hour >= 9 && _dateTimePaid.Hour < 20)
             {
-                Console.WriteLine("\nYou can be park until {0}", _dateTimePaid.AddDays(1));
+                Console.WriteLine("\n >>>You can be park until {0}", _dateTimePaid.AddDays(1));
 
             }
             //If it is on the Week between Midnight to 9am
@@ -559,12 +559,12 @@ namespace Functionalities
                 _dateAtMidnight.Add(_CompareDates); //add TimeSpan with the midnight date [fixed date in time]
                 _timePaid = _dateTimePaid.Subtract(_dateAtMidnight); //Gives the time paid by the user
                 _openTimeWeek.Add(_timePaid); //add to the open hour the time paid
-                Console.WriteLine("\nYou can be park from this date time {0}", _openTimeWeek);
+                Console.WriteLine("\n >>>You can be park from this date time {0}", _openTimeWeek);
             }
             //If it is the Week between the 9am to 8pm and Saturdays 9am to 2pm
             else 
             {
-                Console.WriteLine("\nYou can be park until {0}", _dateTimePaid);
+                Console.WriteLine("\n >>>You can be park until {0}", _dateTimePaid);
             }
         }
     }
