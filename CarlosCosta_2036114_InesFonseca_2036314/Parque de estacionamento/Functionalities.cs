@@ -317,14 +317,7 @@ namespace Functionalities
     }
     public class Schedule
     {
-        /*A Class needs:
-         * Atributs
-         * Selectors and Properties
-         * Constructs
-         * Methods
-         * */
-
-        //================= Atributs ===============================
+        
         private static List<int> _dayOfWeek = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
 
         //private double _timePaid;
@@ -333,28 +326,7 @@ namespace Functionalities
         private double _minute;
         private double _second = 0;
         private double timeConvertMinutes;
-
-        //private DateTime _dateForTimeCount = new DateTime();
-        //DateTime _dateAtOpen = new DateTime();
-        //DateTime _dateAtClose = new DateTime();
-        //public TimeSpan _TimePaid;
-
-
-
-        //================= Selector and Properties ==============================
-        /*public List<int> DayOfWeek 
-        { 
-            get { return _dayOfWeek; }
-            set { _dayOfWeek = value; }
-        }*/
-
-        /*public double TimePaid 
-        {
-            get { return _timePaid; }
-            set { _timePaid = value; }
-        }*/
-
-        //================= Constructs ==============================
+       
         public Schedule()
         {
             this._days = new double();
@@ -388,7 +360,6 @@ namespace Functionalities
         }
 
 
-        //=================== Methods =============================== seg a sex => 9h-20h // sab => 9h-14h //Doming => for free!?
         public void CalculateTime(double _timePaid)
         {
             for (int i = 0; i < _timePaid; i++)
@@ -410,18 +381,9 @@ namespace Functionalities
                 }*/
             }
 
-            //double novo = _timePaid / 60;
-
-
-            var time = TimeSpan.FromMinutes(_timePaid);
-            //Console.WriteLine("{0:00}:{1:00}", (int)time.TotalHours, time.Minutes);
-
-
+           var time = TimeSpan.FromMinutes(_timePaid);
             _hour = (int)time.TotalHours;
             _minute = time.Minutes;
-
-            //Console.WriteLine("Novo valor " + novo);
-
         }
 
         public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute)
