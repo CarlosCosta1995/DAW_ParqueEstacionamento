@@ -122,6 +122,7 @@ namespace Functionalities
              CarsInZone3 = carsInZone3;
          }*/
     }
+
     //============================== Class ZoneAvailability ==============================//
     //Method that receives the arrays from CarPlate Method
     //Calculates the available car slots (Quantity of zone slots - occupied slots in the zone given by the CarsInZoneX)
@@ -174,6 +175,7 @@ namespace Functionalities
 
     }
 
+    //============================== Class MoneyMachine ==============================//
     public partial class MoneyMachine
     {
         //Receives the cash from the user input
@@ -311,6 +313,259 @@ namespace Functionalities
             _timePaidForZone3 = (_addCash * _maxMinutesInZone3) / _timePerHourZone3; // (20.00 * 0.62) / 60;
             //Console.WriteLine("Tempo !!!#!" + _timePaidForZone3);
             return _timePaidForZone3;
+        }
+    }
+    public class Schedule
+    {
+        /*A Class needs:
+         * Atributs
+         * Selectors and Properties
+         * Constructs
+         * Methods
+         * */
+
+        //================= Atributs ===============================
+        private static List<int> _dayOfWeek = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
+
+        //private double _timePaid;
+        private double _days;
+        private double _hour;
+        private double _minute;
+        private double _second = 0;
+        private double timeConvertMinutes;
+
+        //private DateTime _dateForTimeCount = new DateTime();
+        //DateTime _dateAtOpen = new DateTime();
+        //DateTime _dateAtClose = new DateTime();
+        //public TimeSpan _TimePaid;
+
+
+
+        //================= Selector and Properties ==============================
+        /*public List<int> DayOfWeek 
+        { 
+            get { return _dayOfWeek; }
+            set { _dayOfWeek = value; }
+        }*/
+
+        /*public double TimePaid 
+        {
+            get { return _timePaid; }
+            set { _timePaid = value; }
+        }*/
+
+        //================= Constructs ==============================
+        public Schedule()
+        {
+            this._days = new double();
+            this._hour = new double();
+            this._minute = new double();
+            this._second = new double();
+        }
+
+        public double Day
+        {
+            get { return _days; }
+            set { _days = value; }
+        }
+
+        public double Hour
+        {
+            get { return _hour; }
+            set { _hour = value; }
+        }
+
+        public double Minute
+        {
+            get { return _minute; }
+            set { _minute = value; }
+        }
+
+        public double Second
+        {
+            get { return _second; }
+            set { _second = value; }
+        }
+
+
+        //=================== Methods =============================== seg a sex => 9h-20h // sab => 9h-14h //Doming => for free!?
+        public void CalculateTime(double _timePaid)
+        {
+            for (int i = 0; i < _timePaid; i++)
+            {
+                //Console.WriteLine("TimePaid" + _timePaid);
+                if (_timePaid >= 1440) //24 (hours in a day) x 60 (minutes in an hour) = 1440 minutes.
+                {
+                    _days += 1;
+                    _timePaid = _timePaid - 1440;
+                }
+                /*else if (_timePaid >= 60)
+                {
+                    _hour += 1;
+                    _timePaid = _timePaid - 60;
+                }
+                else if (_timePaid < 60)
+                {
+                    _minute = _timePaid;
+                }*/
+            }
+
+            //double novo = _timePaid / 60;
+
+
+            var time = TimeSpan.FromMinutes(_timePaid);
+            //Console.WriteLine("{0:00}:{1:00}", (int)time.TotalHours, time.Minutes);
+
+
+            _hour = (int)time.TotalHours;
+            _minute = time.Minutes;
+
+            //Console.WriteLine("Novo valor " + novo);
+
+        }
+
+        public DateTime ScheduleForZone(DateTime _dateForTimeCount, double day, double hour, double minute)
+        {
+            int _todayDay = 0;
+            int _todayHour = 0;
+            int _todayMinute = 0;
+
+            //Store the result in a TimeSpan
+            TimeSpan tSpan;
+            DateTime resultado = _dateForTimeCount;
+
+            while (minute > 0)
+            {
+                if (minute > 59)
+                {
+                    _todayHour += 1;
+                    minute -= 59;
+                }
+                else
+                {
+                    if ((int)_dateForTimeCount.DayOfWeek != 0 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
+                    {
+                        _todayMinute += 1;
+                    }
+                    else if ((int)_dateForTimeCount.DayOfWeek == 6 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 14)
+                    {
+                        _todayMinute += 1;
+                    }
+                }
+                minute--;
+            }
+
+            while (hour > 0)
+            {
+                if (hour > 23)
+                {
+                    _todayDay += 1;
+                    hour -= 23;
+                }
+                else
+                {
+                    if ((int)_dateForTimeCount.DayOfWeek != 0 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 20)
+                    {
+                        _todayHour += 1;
+                    }
+                    else if ((int)_dateForTimeCount.DayOfWeek == 6 && _dateForTimeCount.Hour >= 9 && _dateForTimeCount.Hour < 14)
+                    {
+                        _todayHour += 1;
+                    }
+                    else
+                    {
+                        _todayHour += 11;
+                    }
+                }
+                hour--;
+            }
+
+            while (day > 0)
+            {
+                if ((int)_dateForTimeCount.DayOfWeek != 6 && (int)_dateForTimeCount.DayOfWeek != 0)
+                {
+                    _todayDay += 1;
+                }
+                else if ((int)_dateForTimeCount.DayOfWeek == 6)
+                {
+                    _todayDay += 1;
+                }
+                else
+                {
+                    _todayDay = 1;
+                }
+                day--;
+            }
+
+            tSpan = new TimeSpan(_todayDay, _todayHour, _todayMinute, 0);
+            resultado = _dateForTimeCount + tSpan;
+
+            return resultado;
+        }
+
+        public void CompareDate(DateTime data)
+        {
+            //Comparar a data do resultado e imprimir as duas datas
+            //tempo pago desde dia e tempo pago no proximo dia
+
+            DateTime _dateTimePaid = data;
+            DateTime _openTimeWeek = new DateTime(data.Year, data.Month, data.Day, 9, 0, 0);
+            DateTime _closeTimeWeek = new DateTime(data.Year, data.Month, data.Day, 20, 0, 0);
+            DateTime _closeTimeSaturday = new DateTime(data.Year, data.Month, data.Day, 14, 0, 0);
+            DateTime _dateAtMidnight = new DateTime(data.Year, data.Month, data.Day, 0, 0, 0);
+            TimeSpan _CompareDates = new TimeSpan();
+            TimeSpan _timePaid = new TimeSpan();
+            //if it is a day of the week after 8 pm
+            if ((int)_dateTimePaid.DayOfWeek != 0 && (int)_dateTimePaid.DayOfWeek != 6 && _dateTimePaid.Hour >= 20)
+            {
+                _CompareDates = _closeTimeWeek.Subtract(_dateTimePaid);
+                //Console.WriteLine("timeSPan comparado" + _CompareDates);
+
+                _openTimeWeek.AddDays(1);
+                _openTimeWeek.Add(_CompareDates);
+                _dateTimePaid = _closeTimeWeek;
+
+                Console.WriteLine("\nYou can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
+            }
+            //If it is Saturdays after 2pm
+            else if ((int)data.DayOfWeek == 6 && _dateTimePaid.Hour >= 14)
+            {
+                _CompareDates = _closeTimeSaturday.Subtract(_dateTimePaid);
+                //Console.WriteLine("timeSPan comparado" + _CompareDates);
+
+                _openTimeWeek.AddDays(2);
+                _openTimeWeek.Add(_CompareDates);
+                _dateTimePaid = _closeTimeSaturday;
+
+                Console.WriteLine("\nYou can be park until {0} until from 9am to {1}", _dateTimePaid, _openTimeWeek);
+            }
+            //If it is Sundays between 9am to 8pm, it that schedule because that way we can only add a day and it is ready for monday 9am
+            else if ((int)_dateTimePaid.DayOfWeek == 0 && _dateTimePaid.Hour >= 9 && _dateTimePaid.Hour < 20)
+            {
+                Console.WriteLine("\nYou can be park until {0}", _dateTimePaid.AddDays(1));
+
+            }
+            //If it is on the Week between Midnight to 9am
+            else if ((int)_dateTimePaid.DayOfWeek != 0 && _dateTimePaid.Hour >= 0 && _dateTimePaid.Hour <= 9) 
+            {
+                /*tempopago = _dateTimePaid.Hour - houraPrimeiraMoeda;
+                tempoEntre0HoraPago = (9 - (9 - _dateTimePaid.Hour));
+                houraPrimeiraMoeda = _dateTimePaid.Hour - (tempoEntre0HoraPago);
+                houraPrimeiraMoeda = _dateTimePaid.Hour - ((9 - (9 - _dateTimePaid.Hour)));
+                _hourFirstCoinInserted = _dateTimePaid.Hour - (_dateTimePaid.Hour - ((9 - (9 - _dateTimePaid.Hour))));
+                9 + horaspagas;*/
+
+                _CompareDates = _dateTimePaid.Subtract(_dateTimePaid.Subtract(_dateAtMidnight.Subtract(_dateTimePaid)));//Determine the TimeSpan of the first coin inserted
+                _dateAtMidnight.Add(_CompareDates); //add TimeSpan with the midnight date [fixed date in time]
+                _timePaid = _dateTimePaid.Subtract(_dateAtMidnight); //Gives the time paid by the user
+                _openTimeWeek.Add(_timePaid); //add to the open hour the time paid
+                Console.WriteLine("\nYou can be park from this date time {0}", _openTimeWeek);
+            }
+            //If it is the Week between the 9am to 8pm and Saturdays 9am to 2pm
+            else 
+            {
+                Console.WriteLine("\nYou can be park until {0}", _dateTimePaid);
+            }
         }
     }
 }
